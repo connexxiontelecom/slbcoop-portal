@@ -68,20 +68,20 @@ class Auth extends BaseController
     return redirect('auth/login');
   }
 
-  private function _get_savings_types_amounts($staff_id): array
-  {
-    $savings_types = $this->_get_savings_types($staff_id);
-    $savings_types_amounts = array();
-    foreach ($savings_types as $savings_type) {
-      $total_dr = 0;
-      $total_cr = 0;
-      $savings_payment_amounts = $this->paymentDetailModel->get_all_payment_details_by_id($staff_id, $savings_type['contribution_type_id']);
-      foreach ($savings_payment_amounts as $savings_payment_amount) {
-        if ($savings_payment_amount->pd_drcrtype == 1) $total_cr += $savings_payment_amount->pd_amount;
-        if ($savings_payment_amount->pd_drcrtype == 2) $total_dr += $savings_payment_amount->pd_amount;
-      }
-      $savings_types_amounts[$savings_type['contribution_type_name']] = $total_cr - $total_dr;
-    }
-    return $savings_types_amounts;
-  }
+//  private function _get_savings_types_amounts($staff_id): array
+//  {
+//    $savings_types = $this->_get_savings_types($staff_id);
+//    $savings_types_amounts = array();
+//    foreach ($savings_types as $savings_type) {
+//      $total_dr = 0;
+//      $total_cr = 0;
+//      $savings_payment_amounts = $this->paymentDetailModel->get_all_payment_details_by_id($staff_id, $savings_type['contribution_type_id']);
+//      foreach ($savings_payment_amounts as $savings_payment_amount) {
+//        if ($savings_payment_amount->pd_drcrtype == 1) $total_cr += $savings_payment_amount->pd_amount;
+//        if ($savings_payment_amount->pd_drcrtype == 2) $total_dr += $savings_payment_amount->pd_amount;
+//      }
+//      $savings_types_amounts[$savings_type['contribution_type_name']] = $total_cr - $total_dr;
+//    }
+//    return $savings_types_amounts;
+//  }
 }

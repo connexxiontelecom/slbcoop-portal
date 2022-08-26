@@ -53,7 +53,7 @@
             <button class="btn btn-lg btn-primary btn-block">Login</button>
           </div>
         </form><!-- form -->
-        <div class="form-note-s2 pt-4"> New on our platform? <a href="/">Download the membership form</a>
+        <div class="form-note-s2 pt-4"> New on our platform? <a href="/">Get your membership form here</a>
         </div>
       </div><!-- .nk-block -->
       <div class="nk-block nk-auth-footer">
@@ -62,15 +62,64 @@
         </div>
       </div><!-- .nk-block -->
     </div><!-- .nk-split-content -->
-    <div
-      class="nk-split-content nk-split-stretch bg-abstract"
-      style="background: url('/assets/images/login-1.jpg') no-repeat center center fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;"
-    >
+    <div class="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
+         data-content="athPromo" data-toggle-screen="lg" data-toggle-overlay="true">
+      <div class="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
+        <div class="slider-init mb-3" data-slick='{"dots":false, "arrows":false, "autoplay": true}'>
+          <div class="slider-item">
+            <div class="nk-feature nk-feature-center">
+              <div class="nk-feature-img">
+                <img class="round" src="/assets/images/slides/slide-1.png" alt="">
+              </div>
+              <div class="nk-feature-content py-4 p-sm-5">
+                <h4>Schlumberger Staff Coop</h4>
+                <p>
+                  Get in touch today for more information on your benefits. <br>
+                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
+                  <br>
+                  <em class="icon ni ni-call-alt mr-1"></em> <a href="tel:+2348090160565">+234 (0) 809 016 0565</a>
+                </p>
+              </div>
+            </div>
+          </div><!-- .slider-item -->
+          <div class="slider-item">
+            <div class="nk-feature nk-feature-center">
+              <div class="nk-feature-img">
+                <img class="round" src="/assets/images/slides/slide-2.png" alt="">
+              </div>
+              <div class="nk-feature-content py-4 p-sm-5">
+                <h4>Schlumberger Staff Coop</h4>
+                <p>
+                  Get in touch today for more information on your benefits. <br>
+                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
+                  <br>
+                  <em class="icon ni ni-call-alt mr-1"></em> <a href="tel:+2348090160565">+234 (0) 809 016 0565</a>
+                </p>
+              </div>
+            </div>
+          </div><!-- .slider-item -->
+          <div class="slider-item">
+            <div class="nk-feature nk-feature-center">
+              <div class="nk-feature-img">
+                <img class="round" src="/assets/images/slides/slide-3.png" alt="">
+              </div>
+              <div class="nk-feature-content py-4 p-sm-5">
+                <h4>Schlumberger Staff Coop</h4>
+                <p>
+                  Get in touch today for more information on your benefits. <br>
+                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
+                  <br>
+                  <em class="icon ni ni-call-alt mr-1"></em> <a href="tel:+2348090160565">+234 (0) 809 016 0565</a>
+                </p>
+              </div>
+            </div>
+          </div><!-- .slider-item -->
+        </div><!-- .slider-init -->
+        <div class="slider-dots"></div>
+        <div class="slider-arrows"></div>
+      </div><!-- .slider-wrap -->
     </div><!-- .nk-split-content -->
+
   </div><!-- .nk-split -->
 </div><!-- app body @e -->
 <!-- JavaScript -->

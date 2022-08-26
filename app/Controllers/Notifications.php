@@ -1,31 +1,42 @@
 <?php
+
 namespace App\Controllers;
 
-class Notifications extends BaseController {
+class Notifications extends BaseController
+{
 
-  function index() {
+  function index()
+  {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $page_data['page_title'] = 'Notifications';
       $page_data['notifications'] = $this->notificationModel->where('receiver_id', $staff_id)->findAll();
       $page_data['unseen_count'] = sizeof($this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll());
+      $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
+      $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
+      $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       return view('notifications/index-all', $page_data);
     }
     return redirect('auth/login');
   }
 
-  function unread_notifications() {
+  function unread_notifications()
+  {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $page_data['page_title'] = 'Unread Notifications';
       $page_data['notifications'] = $this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll();
       $page_data['unseen_count'] = sizeof($this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll());
+      $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
+      $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
+      $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       return view('notifications/index-unread', $page_data);
     }
     return redirect('auth/login');
   }
 
-  function get_user_notifications() {
+  function get_user_notifications()
+  {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $user_notifications = $this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll();
@@ -34,12 +45,14 @@ class Notifications extends BaseController {
     return redirect('auth/login');
   }
 
-  function view_notification($notification_id) {
+  function view_notification($notification_id)
+  {
     if ($this->session->active) {
+      $staff_id = $this->session->get('staff_id');
       $notification = $this->notificationModel->find($notification_id);
       if ($notification) {
         if ($notification['seen'] == 0) {
-          $notification_data = [ 'notification_id' => $notification['notification_id'], 'seen' => 1];
+          $notification_data = ['notification_id' => $notification['notification_id'], 'seen' => 1];
           $this->notificationModel->save($notification_data);
           $notification = $this->notificationModel->find($notification_id);
         }
@@ -53,6 +66,9 @@ class Notifications extends BaseController {
             $page_data['loan_guarantor'] = $loan_guarantor;
             $page_data['loan_application'] = $loan_application;
             $page_data['loan_details'] = $loan_details;
+            $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
+            $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
+            $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
             break;
         }
         return view('notifications/view-notification', $page_data);

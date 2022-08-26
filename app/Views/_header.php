@@ -1,5 +1,5 @@
 <?php
-  $session = session();
+$session = session();
 ?>
 <div class="nk-header nk-header-fluid nk-header-fixed is-light">
   <div class="container-fluid">
@@ -16,13 +16,14 @@
       </div>
       <div class="nk-header-news d-none d-xl-block">
         <div class="nk-news-list">
-          <a class="nk-news-item" href="javascript:void(0)" target="_blank">
+          <a class="nk-news-item" href="https://slbstaffcoop.com/AboutUs" target="_blank">
             <div class="nk-news-icon">
               <em class="icon ni ni-card-view"></em>
             </div>
             <div class="nk-news-text">
-              <p>Do you know the latest update of 2022? <span> Review all the changes we've made here</span></p>
-              <em class="icon ni ni-external"></em>
+              <p>Schlumberger Staff Credit & Investment: <span>The Society was incorporated in May 1999 as an autonomous and voluntary organization</span>
+              </p>
+              <em class="icon ni ni-external ml-1"></em>
             </div>
           </a>
         </div>
@@ -33,14 +34,16 @@
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
               <div class="user-toggle">
                 <div class="user-avatar sm">
-                  <em class="icon ni ni-user-alt"></em>
+                  <span>
+                      <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
+                    </span>
                 </div>
                 <div class="user-info d-none d-md-block">
-                  <?php if($session->get('status') == 2):?>
+                  <?php if ($session->get('status') == 2): ?>
                     <div class="user-status user-status-verified">Active</div>
-                  <?php endif;?>
+                  <?php endif; ?>
                   <div class="user-name dropdown-indicator">
-                    <?= $session->get('firstname').' '.$session->get('lastname') ?>
+                    <?= $session->get('firstname') . ' ' . $session->get('lastname') ?>
                   </div>
                 </div>
               </div>
@@ -50,31 +53,31 @@
                 <div class="user-card">
                   <div class="user-avatar">
                     <span>
-                      <?= ucfirst($session->get('firstname')).''.ucfirst($session->get('lastname')) ?>
+                      <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
                     </span>
                   </div>
                   <div class="user-info">
-                    <span class="lead-text"><?= $session->get('firstname').' '.$session->get('lastname') ?></span>
+                    <span class="lead-text"><?= $session->get('firstname') . ' ' . $session->get('lastname') ?></span>
                     <span class="sub-text"><?= $session->get('email') ?></span>
                   </div>
                 </div>
               </div>
               <div class="dropdown-inner user-account-info">
                 <h6 class="overline-title-alt">Regular Savings</h6>
-                <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> <?=number_format($session->get('regular_savings'), 2)?></div>
-                <a href="/withdrawal-application" class="link mt-2"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a>
+                <div class="user-balance"><em
+                    class="icon ni ni-sign-kobo"></em> <?= number_format($session->get('regular_savings'), 2) ?></div>
+                <a href="/withdrawal-application" class="link mt-2"><span>Withdraw Funds</span> <em
+                    class="icon ni ni-wallet-out"></em></a>
               </div>
               <div class="dropdown-inner">
                 <ul class="link-list">
-                  <li><a href="#"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                  <li><a href="#"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                  <li><a href="#"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
-                  <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
+                  <li><a href="/account"><em class="icon ni ni-user-alt"></em><span>My Account</span></a></li>
                 </ul>
               </div>
               <div class="dropdown-inner">
                 <ul class="link-list">
-                  <li><a href="<?= site_url('logout')?>"><em class="icon ni ni-signout"></em><span>Logout</span></a></li>
+                  <li><a href="<?= site_url('logout') ?>"><em class="icon ni ni-signout"></em><span>Logout</span></a>
+                  </li>
                 </ul>
               </div>
             </div>

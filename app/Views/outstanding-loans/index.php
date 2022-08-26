@@ -3,15 +3,15 @@ $session = session();
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
-<?php include(APPPATH.'/Views/_head.php'); ?>
+<?php include(APPPATH . '/Views/_head.php'); ?>
 <body class="nk-body npc-crypto bg-white has-sidebar">
 <div class="nk-app-root">
-	<div class="nk-main">
-		<?php include(APPPATH.'/Views/_sidebar.php'); ?>
-		<div class="nk-wrap">
-			<?php include(APPPATH.'/Views/_header.php'); ?>
-			<div class="nk-content nk-content-fluid">
-				<div class="container-xl wide-lg">
+  <div class="nk-main">
+    <?php include(APPPATH . '/Views/_sidebar.php'); ?>
+    <div class="nk-wrap">
+      <?php include(APPPATH . '/Views/_header.php'); ?>
+      <div class="nk-content nk-content-fluid">
+        <div class="container-xl wide-lg">
           <div class="nk-content-body">
             <div class="components-preview">
               <div class="nk-block-head nk-block-head-lg wide-sm">
@@ -43,33 +43,35 @@ $session = session();
                       </tr>
                       </thead>
                       <tbody>
-                        <?php if (!empty($outstanding_loans)): foreach ($outstanding_loans as $outstanding_loan): ?>
-                          <tr>
-                            <td>
-                              <?=$outstanding_loan['loan_type']?>
-                            </td>
-                            <td class="text-right">
-                              <?=number_format($outstanding_loan['loan_principal'], 2)?>
-                            </td>
-                            <td class="text-right">
-	                            <?=number_format($outstanding_loan['total_interest'], 2)?>
-                            </td>
-                            <td class="text-right">
-	                            <?=number_format($outstanding_loan['total_cr'], 2)?>
-                            </td>
-                            <td class="text-right">
-	                            <?=number_format($outstanding_loan['loan_balance'], 2)?>
-                            </td>
-                            <td class="text-right">
-	                            <?=number_format(0, 2)?>
-                            </td>
-                            <td class="text-right">
-                              <a href="<?=site_url('outstanding-loans/view-outstanding-loan/'.$outstanding_loan['loan_id'])?>" class="btn btn-icon btn-trigger">
-                                <em class="icon ni ni-more-h"></em>
-                              </a>
-                            </td>
-                          </tr>
-                        <?php endforeach; endif;?>
+                      <?php if (!empty($outstanding_loans)): foreach ($outstanding_loans as $outstanding_loan): ?>
+                        <tr>
+                          <td>
+                            <?= $outstanding_loan['loan_type'] ?>
+                          </td>
+                          <td class="text-right">
+                            <?= number_format($outstanding_loan['loan_principal'], 2) ?>
+                          </td>
+                          <td class="text-right">
+                            <?= number_format($outstanding_loan['total_interest'], 2) ?>
+                          </td>
+                          <td class="text-right">
+                            <?= number_format($outstanding_loan['total_cr'], 2) ?>
+                          </td>
+                          <td class="text-right">
+                            <?= number_format($outstanding_loan['loan_balance'], 2) ?>
+                          </td>
+                          <td class="text-right">
+                            <?= number_format(0, 2) ?>
+                          </td>
+                          <td class="text-right">
+                            <a
+                              href="<?= site_url('outstanding-loans/view-outstanding-loan/' . $outstanding_loan['loan_id']) ?>"
+                              class="btn btn-icon btn-trigger">
+                              <em class="icon ni ni-more-h"></em>
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; endif; ?>
                       </tbody>
                     </table>
                   </div>
@@ -78,11 +80,11 @@ $session = session();
             </div><!-- .components-preview -->
           </div>
         </div>
-			</div>
-			<?php include(APPPATH.'/Views/_footer.php'); ?>
-		</div>
-	</div>
+      </div>
+      <?php include(APPPATH . '/Views/_footer.php'); ?>
+    </div>
+  </div>
 </div>
-<?php include(APPPATH.'/Views/_scripts.php'); ?>
+<?php include(APPPATH . '/Views/_scripts.php'); ?>
 </body>
 </html>

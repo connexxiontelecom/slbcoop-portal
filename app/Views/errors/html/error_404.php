@@ -1,84 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx" class="js">
+
 <head>
-	<meta charset="utf-8">
-	<title>404 Page Not Found</title>
-
-	<style>
-	div.logo {
-		height: 200px;
-		width: 155px;
-		display: inline-block;
-		opacity: 0.08;
-		position: absolute;
-		top: 2rem;
-		left: 50%;
-		margin-left: -73px;
-	}
-	body {
-		height: 100%;
-		background: #fafafa;
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		color: #777;
-		font-weight: 300;
-	}
-	h1 {
-		font-weight: lighter;
-		letter-spacing: 0.8;
-		font-size: 3rem;
-		margin-top: 0;
-		margin-bottom: 0;
-		color: #222;
-	}
-	.wrap {
-		max-width: 1024px;
-		margin: 5rem auto;
-		padding: 2rem;
-		background: #fff;
-		text-align: center;
-		border: 1px solid #efefef;
-		border-radius: 0.5rem;
-		position: relative;
-	}
-	pre {
-		white-space: normal;
-		margin-top: 1.5rem;
-	}
-	code {
-		background: #fafafa;
-		border: 1px solid #efefef;
-		padding: 0.5rem 1rem;
-		border-radius: 5px;
-		display: block;
-	}
-	p {
-		margin-top: 1.5rem;
-	}
-	.footer {
-		margin-top: 2rem;
-		border-top: 1px solid #efefef;
-		padding: 1em 2em 0 2em;
-		font-size: 85%;
-		color: #999;
-	}
-	a:active,
-	a:link,
-	a:visited {
-		color: #dd4814;
-	}
-</style>
+  <meta charset="utf-8">
+  <meta name="author" content="Connexxion Telecom">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Cooperators Member's Portal for ICOOP">
+  <!-- Fav Icon  -->
+  <link rel="shortcut icon" href="/assets/images/favicon.png">
+  <!-- Page Title  -->
+  <title>Error 404 | ICOOP Member's Portal </title>
+  <!-- StyleSheets  -->
+  <link rel="stylesheet" href="/assets/css/dashlite.css?ver=2.2.0">
+  <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=2.2.0">
 </head>
-<body>
-	<div class="wrap">
-		<h1>404 - File Not Found</h1>
 
-		<p>
-			<?php if (! empty($message) && $message !== '(null)') : ?>
-				<?= esc($message) ?>
-			<?php else : ?>
-				Sorry! Cannot seem to find the page you were looking for.
-			<?php endif ?>
-		</p>
-	</div>
-</body>
+<body class="nk-body bg-white npc-general pg-error">
+<div class="nk-app-root">
+  <!-- main @s -->
+  <div class="nk-main ">
+    <!-- wrap @s -->
+    <div class="nk-wrap nk-wrap-nosidebar">
+      <!-- content @s -->
+      <div class="nk-content ">
+        <div class="nk-block nk-block-middle wide-xs mx-auto">
+          <div class="nk-block-content nk-error-ld text-center">
+            <h1 class="nk-error-head">404</h1>
+            <h3 class="nk-error-title">Oops! Why are you here?</h3>
+            <p class="nk-error-text">It looks like you’re trying to access a page
+              that either has been deleted or never existed.</p>
+            <a href="/dashboard" class="btn btn-lg btn-primary mt-2">Back To Home</a>
+          </div>
+        </div><!-- .nk-block -->
+      </div>
+      <!-- wrap @e -->
+    </div>
+    <!-- content @e -->
+  </div>
+  <!-- main @e -->
+</div>
+<!-- app-root @e -->
+<!-- JavaScript -->
+<script src="./assets/js/bundle.js?ver=2.2.0"></script>
+<script src="./assets/js/scripts.js?ver=2.2.0"></script>
+
 </html>

@@ -1,11 +1,16 @@
 <?php
+
 namespace App\Controllers;
-use \DateTime;
 
-class LoanApplication extends BaseController {
+use DateTime;
 
-  function index() {
+class LoanApplication extends BaseController
+{
+
+  function index()
+  {
     if ($this->session->active) {
+      $staff_id = $this->session->get('staff_id');
       $outstanding_loans = $this->_get_user_loans(0);
       $total_encumbrance = 0;
       foreach ($outstanding_loans as $outstanding_loan) {
@@ -14,12 +19,16 @@ class LoanApplication extends BaseController {
       $page_data['page_title'] = 'Loan Application';
       $page_data['loan_types'] = $this->loanSetupModel->where('status', 1)->findAll();
       $page_data['encumbrance_amount'] = $total_encumbrance;
+      $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
+      $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
+      $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       return view('service-forms/loan-application', $page_data);
     }
     return redirect('auth/login');
   }
 
-  function get_loan_setup_details($loan_setup_id) {
+  function get_loan_setup_details($loan_setup_id)
+  {
     if ($this->session->active) {
       // @TODO refactor method to use Request pattern
       $loan_setup_details = $this->loanSetupModel->find($loan_setup_id);
@@ -28,7 +37,8 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  function check_guarantor() {
+  function check_guarantor()
+  {
     $staff_id = $this->session->get('staff_id');
     $response_data = array();
     // @TODO check that $cooperator_id != $staff_id and check if the same guarantor has been selected.
@@ -60,7 +70,8 @@ class LoanApplication extends BaseController {
     return $this->response->setJSON($response_data);
   }
 
-  function submit_loan_application() {
+  function submit_loan_application()
+  {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $staff_status = $this->session->get('status');
@@ -105,7 +116,8 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  function confirm_guarantor() {
+  function confirm_guarantor()
+  {
     if ($this->session->active) {
       $post_data = $this->request->getPost();
       if ($post_data) {
@@ -114,7 +126,7 @@ class LoanApplication extends BaseController {
         $loan_guarantor = $this->loanGuarantorModel->find($loan_guarantor_id);
         if ($loan_guarantor) {
           if ($loan_guarantor['confirm'] == 0) {
-            $loan_guarantor_data = [ 'loan_guarantor_id' => $loan_guarantor_id, 'confirm' => 2 ];
+            $loan_guarantor_data = ['loan_guarantor_id' => $loan_guarantor_id, 'confirm' => 2];
             $confirmed = $this->loanGuarantorModel->save($loan_guarantor_data);
             if ($confirmed) {
               $response_data['success'] = true;
@@ -140,7 +152,8 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  function reject_guarantor() {
+  function reject_guarantor()
+  {
     if ($this->session->active) {
       $post_data = $this->request->getPost();
       if ($post_data) {
@@ -149,7 +162,7 @@ class LoanApplication extends BaseController {
         $loan_guarantor = $this->loanGuarantorModel->find($loan_guarantor_id);
         if ($loan_guarantor) {
           if ($loan_guarantor['confirm'] == 0) {
-            $loan_guarantor_data = [ 'loan_guarantor_id' => $loan_guarantor_id, 'confirm' => 1 ];
+            $loan_guarantor_data = ['loan_guarantor_id' => $loan_guarantor_id, 'confirm' => 1];
             $rejected = $this->loanGuarantorModel->save($loan_guarantor_data);
             if ($rejected) {
               $response_data['success'] = true;
@@ -175,7 +188,8 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  private function  _submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename): array {
+  private function _submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename): array
+  {
     $staff_id = $this->session->get('staff_id');
     $firstname = $this->session->get('firstname');
     $lastname = $this->session->get('lastname');
@@ -193,20 +207,20 @@ class LoanApplication extends BaseController {
     // @TODO do all checks in here and submit loan application
     if ($loan_setup_details) {
       // check if user has been approved longer than the loan age qualification
-    //   $today = date_create(strval(date('Y-m-d')));
-    //   $user_approved_date = date_create(strval($this->session->get('approved_date')));
-    //   $months_difference = date_diff($user_approved_date, $today)->format('%m');
-      
-      
-        $start = new DateTime($this->session->get('approved_date'));
-        $end = new DateTime(date('Y-m-d'));
-        $diff = $start->diff($end);
-        
-        $yearsInMonths = $diff->format('%r%y') * 12;
-        $months = $diff->format('%r%m');
-        $months_difference = $yearsInMonths + $months;
-      
-      
+      //   $today = date_create(strval(date('Y-m-d')));
+      //   $user_approved_date = date_create(strval($this->session->get('approved_date')));
+      //   $months_difference = date_diff($user_approved_date, $today)->format('%m');
+
+
+      $start = new DateTime($this->session->get('approved_date'));
+      $end = new DateTime(date('Y-m-d'));
+      $diff = $start->diff($end);
+
+      $yearsInMonths = $diff->format('%r%y') * 12;
+      $months = $diff->format('%r%m');
+      $months_difference = $yearsInMonths + $months;
+
+
       if ($months_difference <= $loan_setup_details['age_qualification']) {
         $response_data['success'] = false;
         //$response_data['msg'] = 'You have not been a member long enough to apply';
@@ -252,7 +266,7 @@ class LoanApplication extends BaseController {
       }
       $loan_application_data = array(
         'staff_id' => $staff_id,
-        'name' => $firstname.' '.$othername.' '.$lastname,
+        'name' => $firstname . ' ' . $othername . ' ' . $lastname,
         'guarantor' => $guarantor_1,
         'guarantor_2' => $guarantor_2,
         'loan_type' => $loan_setup_id,
@@ -267,8 +281,8 @@ class LoanApplication extends BaseController {
       $this->_update_loan_guarantors($loan_application_id, $guarantor_1, $staff_id);
       $this->_update_loan_guarantors($loan_application_id, $guarantor_2, $staff_id);
       $response_data['success'] = true;
-      $response_data['msg'] = 'You have successfully applied for a '. number_format($loan_amount, 2).'
-       amount loan for '. $loan_duration.' months. Your chosen guarantors have been notified for their approval.';
+      $response_data['msg'] = 'You have successfully applied for a ' . number_format($loan_amount, 2) . '
+       amount loan for ' . $loan_duration . ' months. Your chosen guarantors have been notified for their approval.';
       return $response_data;
     }
     $response_data['success'] = false;
@@ -276,7 +290,8 @@ class LoanApplication extends BaseController {
     return $response_data;
   }
 
-  private function _update_loan_guarantors($loan_application_id, $guarantor_id, $staff_id) {
+  private function _update_loan_guarantors($loan_application_id, $guarantor_id, $staff_id)
+  {
     $guarantor_data = array(
       'loan_application_id' => $loan_application_id,
       'guarantor_id' => $guarantor_id,

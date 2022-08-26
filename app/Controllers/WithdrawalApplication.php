@@ -1,19 +1,26 @@
 <?php
+
 namespace App\Controllers;
 
-class WithdrawalApplication extends BaseController {
+class WithdrawalApplication extends BaseController
+{
 
-  function index() {
+  function index()
+  {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $page_data['page_title'] = 'Withdrawal Application';
       $page_data['savings_types'] = $this->_get_savings_types($staff_id);
+      $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
+      $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
+      $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       return view('service-forms/withdrawal-application', $page_data);
     }
     return redirect('auth/login');
   }
 
-  function compute_balance($savings_type) {
+  function compute_balance($savings_type)
+  {
     $staff_id = $this->session->get('staff_id');
     $status = $this->session->get('status');
     if ($status == 2) {
@@ -55,7 +62,8 @@ class WithdrawalApplication extends BaseController {
     return $this->response->setJSON($response_data);
   }
 
-  function submit_withdrawal_application() {
+  function submit_withdrawal_application()
+  {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $staff_status = $this->session->get('status');
@@ -114,8 +122,8 @@ class WithdrawalApplication extends BaseController {
               );
               $this->withdrawModel->save($withdrawal_application_data);
               $response_data['success'] = true;
-              $response_data['msg'] = 'You have successfully applied for a '. number_format($withdrawal_amount, 2).'
-              amount withdrawal. You will be charged '. number_format($withdrawal_charges, 2).' for this withdrawal.';
+              $response_data['msg'] = 'You have successfully applied for a ' . number_format($withdrawal_amount, 2) . '
+              amount withdrawal. You will be charged ' . number_format($withdrawal_charges, 2) . ' for this withdrawal.';
               return $this->response->setJSON($response_data);
             }
           } else {
@@ -138,7 +146,8 @@ class WithdrawalApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  private function _get_savings_type_amount($staff_id, $savings_type) {
+  private function _get_savings_type_amount($staff_id, $savings_type)
+  {
     $savings_type_payments = $this->paymentDetailModel->where(['pd_staff_id' => $staff_id, 'pd_ct_id' => $savings_type])->findAll();
     $total_dr = 0;
     $total_cr = 0;

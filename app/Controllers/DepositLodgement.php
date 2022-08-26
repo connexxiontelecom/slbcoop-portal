@@ -7,8 +7,12 @@ class DepositLodgement extends BaseController
   function index()
   {
     if ($this->session->active) {
+      $staff_id = $this->session->get('staff_id');
       $page_data['page_title'] = 'Deposit/Lodgement';
       $page_data['coop_banks'] = $this->_get_coop_banks();
+      $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
+      $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
+      $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       return view('service-forms/deposit-lodgement', $page_data);
     }
     return redirect('auth/login');
@@ -143,7 +147,7 @@ class DepositLodgement extends BaseController
       return $this->response->setJSON($response_data);
     }
     $response_data['success'] = true;
-    $response_data['msg'] = 'You have successfully submitted a deposit of '. number_format($payment_amount, 2);
+    $response_data['msg'] = 'You have successfully submitted a deposit of ' . number_format($payment_amount, 2);
 
     return $this->response->setJSON($response_data);
   }

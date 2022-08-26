@@ -21,6 +21,14 @@
     });
   })
 
+  $('.success-login').on('click', function (e) {
+    e.preventDefault()
+    toastr.clear()
+    NioApp.Toast('<b>Welcome</b>, you have logged in successfully!', 'success', {
+      position: 'top-right'
+    });
+  })
+
   // $('.eg-toastr-default').on("click", function (e) {
   //   e.preventDefault();
   //   toastr.clear();
