@@ -53,7 +53,8 @@
             <button class="btn btn-lg btn-primary btn-block">Login</button>
           </div>
         </form><!-- form -->
-        <div class="form-note-s2 pt-4"> New on our platform? <a href="/">Get your membership form here</a>
+        <div class="form-note-s2 pt-4"> New on our platform? <a href="/assets/files/sample.pdf" download>Get your
+            membership form here</a>
         </div>
       </div><!-- .nk-block -->
       <div class="nk-block nk-auth-footer">

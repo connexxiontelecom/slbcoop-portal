@@ -59,11 +59,18 @@ $session = session();
           <a class="nk-profile-toggle toggle-expand" data-target="sidebarProfile" href="#">
             <div class="user-card-wrap">
               <div class="user-card">
-                <div class="user-avatar">
+                <?php if (!$cooperator['cooperator_passport']): ?>
+                  <div class="user-avatar">
                   <span>
                       <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
-                  </span>
-                </div>
+                    </span>
+                  </div>
+                <?php else: ?>
+                  <div class="nk-block-text mr-2">
+                    <img src="/uploads/passports/<?= $cooperator['cooperator_passport'] ?>" style="width: 3em"
+                         alt="display picture" class="img-fluid circle">
+                  </div>
+                <?php endif ?>
                 <div class="user-info">
                   <span class="lead-text"><?= $session->get('firstname') . ' ' . $session->get('lastname') ?></span>
                   <span class="sub-text"><?= $session->get('email') ?></span>

@@ -66,6 +66,8 @@ $routes->get('get-user-notifications', 'Notifications::get_user_notifications');
 $routes->get('notifications/view-notification/(:num)', 'Notifications::view_notification/$1');
 
 $routes->get('account', 'Account::index');
+$routes->post('account/upload-display-picture', 'Account::upload_display_picture');
+$routes->get('security', 'Account::security');
 
 $routes->get('auth/login', 'Auth::login');
 $routes->post('login', 'Auth::auth_login');

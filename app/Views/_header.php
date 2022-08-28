@@ -33,11 +33,18 @@ $session = session();
           <li class="dropdown user-dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
               <div class="user-toggle">
-                <div class="user-avatar sm">
+                <?php if (!$cooperator['cooperator_passport']): ?>
+                  <div class="user-avatar sm">
                   <span>
                       <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
                     </span>
-                </div>
+                  </div>
+                <?php else: ?>
+                  <div class="nk-block-text mr-2">
+                    <img src="/uploads/passports/<?= $cooperator['cooperator_passport'] ?>" style="width: 2em"
+                         alt="display picture" class="img-fluid circle">
+                  </div>
+                <?php endif ?>
                 <div class="user-info d-none d-md-block">
                   <?php if ($session->get('status') == 2): ?>
                     <div class="user-status user-status-verified">Active</div>
@@ -51,11 +58,18 @@ $session = session();
             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
               <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                 <div class="user-card">
-                  <div class="user-avatar">
-                    <span>
+                  <?php if (!$cooperator['cooperator_passport']): ?>
+                    <div class="user-avatar">
+                  <span>
                       <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
                     </span>
-                  </div>
+                    </div>
+                  <?php else: ?>
+                    <div class="nk-block-text mr-2">
+                      <img src="/uploads/passports/<?= $cooperator['cooperator_passport'] ?>" style="width: 3em"
+                           alt="display picture" class="img-fluid circle">
+                    </div>
+                  <?php endif ?>
                   <div class="user-info">
                     <span class="lead-text"><?= $session->get('firstname') . ' ' . $session->get('lastname') ?></span>
                     <span class="sub-text"><?= $session->get('email') ?></span>

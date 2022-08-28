@@ -14,6 +14,7 @@ class OutstandingLoans extends BaseController
       $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
       $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
       $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
+      $page_data['cooperator'] = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();;
       return view('outstanding-loans/index', $page_data);
     }
     return redirect('auth/login');
@@ -30,6 +31,7 @@ class OutstandingLoans extends BaseController
         $page_data['encumbered_amount'] = $this->_get_encumbered_amount();
         $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
         $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
+        $page_data['cooperator'] = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();;
         return view('outstanding-loans/outstanding-loans-ledger', $page_data);
       }
       return redirect('outstanding-loans');
