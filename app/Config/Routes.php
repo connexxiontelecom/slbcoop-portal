@@ -70,7 +70,9 @@ $routes->post('account/upload-display-picture', 'Account::upload_display_picture
 $routes->get('security', 'Account::security');
 
 $routes->get('auth/login', 'Auth::login');
+$routes->get('auth/membership', 'Auth::membership');
 $routes->post('login', 'Auth::auth_login');
+$routes->post('membership', 'Auth::auth_membership');
 $routes->get('logout', 'Auth::logout');
 
 

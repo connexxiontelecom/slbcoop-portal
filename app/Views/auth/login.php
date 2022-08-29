@@ -14,7 +14,7 @@
         <div class="brand-logo pb-4 ml-0">
           <a href="/" class="logo-link ml-n5">
             <img class="logo-light logo-img logo-img-lg" src="/assets/images/slb-logo.jpg" alt="logo">
-            <img class="logo-dark ml-n4" style="width: 35% !important; max-height: 1000px !important;"
+            <img class="logo-dark ml-n4" style="width: 5em !important;"
                  src="/assets/images/slb-logo.jpg" alt="logo-dark">
           </a>
         </div>
@@ -53,7 +53,8 @@
             <button class="btn btn-lg btn-primary btn-block">Login</button>
           </div>
         </form><!-- form -->
-        <div class="form-note-s2 pt-4"> New on our platform? <a href="/assets/files/sample.pdf" download>Get your
+        <div class="form-note-s2 pt-4"> New on our platform? <a href="/auth/membership">Fill & submit
+            the
             membership form here</a>
         </div>
       </div><!-- .nk-block -->

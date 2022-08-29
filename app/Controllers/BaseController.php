@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AccountClosureModel;
+use App\Models\ApplicationModel;
 use App\Models\BankModel;
 use App\Models\ContributionTypeModel;
 use App\Models\CoopBankModel;
@@ -49,6 +50,7 @@ class BaseController extends Controller
   protected $session;
 
   protected $accountClosureModel;
+  protected $applicationModel;
   protected $bankModel;
   protected $contributionTypeModel;
   protected $coopBankModel;
@@ -87,6 +89,7 @@ class BaseController extends Controller
     $this->session = \CodeIgniter\Config\Services::session();
     // models
     $this->accountClosureModel = new AccountClosureModel();
+    $this->applicationModel = new ApplicationModel();
     $this->bankModel = new BankModel();
     $this->contributionTypeModel = new ContributionTypeModel();
     $this->coopBankModel = new CoopBankModel();

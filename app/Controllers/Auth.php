@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use DateTime;
+
 class Auth extends BaseController
 {
 
@@ -57,6 +59,78 @@ class Auth extends BaseController
         return redirect('auth/login');
       }
     }
+  }
+
+  function membership()
+  {
+    if ($this->session->active) {
+      return redirect('/');
+    }
+    $page_data['page_title'] = 'Coop Membership';
+    $page_data['departments'] = $this->departmentModel->findAll();
+    $page_data['payroll_groups'] = $this->payrollGroupModel->findAll();
+    $page_data['states'] = $this->stateModel->findAll();
+    $page_data['banks'] = $this->bankModel->findAll();
+    $page_data['profile'] = $this->policyConfigModel->first();
+    return view('auth/membership', $page_data);
+  }
+
+  function auth_membership()
+  {
+    $post_data = $this->request->getPost();
+    if (!$post_data) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'An error occurred. Please try again later.';
+      $response_data['meta'] = 'No post data';
+      return $this->response->setJSON($response_data);
+    }
+
+    if (!$post_data['application_staff_id'] || !$post_data['application_first_name'] || !$post_data['application_last_name'] || !$post_data['application_email'] || !$post_data['application_dob'] || !$post_data['application_city'] || !$post_data['application_telephone'] || !$post_data['application_address'] || !$post_data['application_bank_branch'] || !$post_data['application_savings'] || !$post_data['application_account_number'] || !$post_data['application_sort_code']) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'Please fill in all required fields!';
+      $response_data['meta'] = 'Empty required fields';
+      return $this->response->setJSON($response_data);
+    }
+
+    $application = $this->applicationModel->where('application_staff_id', $post_data['application_staff_id'])->findAll();
+    if ($application) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'The staff id already exists';
+      $response_data['meta'] = 'Duplicate staff id';
+      return $this->response->setJSON($response_data);
+    }
+
+    $application = $this->applicationModel->where('application_telephone', $post_data['application_telephone'])->findAll();
+    if ($application) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'The telephone number already exists';
+      $response_data['meta'] = 'Duplicate telephone number';
+      return $this->response->setJSON($response_data);
+    }
+
+    $application = $this->applicationModel->where('application_email', $post_data['application_email'])->findAll();
+    if ($application) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'The email address already exists';
+      $response_data['meta'] = 'Duplicate email address';
+      return $this->response->setJSON($response_data);
+    }
+
+    $_POST['application_date'] = date('Y-m-d');
+    $dob = DateTime::createFromFormat('m/d/Y', $_POST['application_dob']);
+    $_POST['application_dob'] = $dob->format('Y-m-d');
+    $saved = $this->applicationModel->save($_POST);
+
+    if (!$saved) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'An error occurred. Please try again later.';
+      $response_data['meta'] = 'Did not save in the db';
+      return $this->response->setJSON($response_data);
+    }
+
+    $response_data['success'] = true;
+    $response_data['msg'] = 'Your application was submitted successfully.';
+    return $this->response->setJSON($response_data);
   }
 
   function logout()
