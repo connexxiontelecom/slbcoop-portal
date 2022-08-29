@@ -15,7 +15,7 @@ $session = session();
           <div class="nk-block-head">
             <div class="nk-block-head-sub mb-3">
               <img class="logo-dark logo-img mr-1" src="/assets/images/slb-logo.jpg" alt="logo-dark">
-              <span>Member's Portal</span>
+              <span>Schlumberger Staff Credit & Investment Cooperative Society Limited</span>
             </div>
             <div class="nk-block-between-md g-4">
               <div class="nk-block-head-content">
