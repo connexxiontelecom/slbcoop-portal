@@ -12,9 +12,9 @@
         <div class="nk-block nk-block-middle nk-auth-body wide-xl">
           <div class="brand-logo pb-4 text-center">
             <a href="/" class="logo-link ml-n5">
-              <img class="logo-light logo-img logo-img-lg" src="/assets/images/slb-logo.jpg" alt="logo">
+              <img class="logo-light logo-img logo-img-lg" src="/assets/images/slbcoop-logo.jpeg" alt="logo">
               <img class="logo-dark ml-n4" style="width: 5em !important;"
-                   src="/assets/images/slb-logo.jpg" alt="logo-dark">
+                   src="/assets/images/slbcoop-logo.jpeg" alt="logo-dark">
             </a>
           </div>
           <div class="kyc-app wide-sm m-auto">

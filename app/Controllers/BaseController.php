@@ -131,7 +131,7 @@ class BaseController extends Controller
     $savings_types = array();
     foreach ($payment_details as $payment_detail) {
       $savings_type = $this->contributionTypeModel->where('contribution_type_id', $payment_detail->pd_ct_id)->first();
-      array_push($savings_types, $savings_type);
+      $savings_types[] = $savings_type;
     }
     return $savings_types;
   }
