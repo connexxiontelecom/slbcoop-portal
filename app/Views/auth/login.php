@@ -13,9 +13,9 @@
       <div class="nk-block nk-block-middle nk-auth-body">
         <div class="brand-logo pb-4 ml-0">
           <a href="/" class="logo-link ml-n5">
-            <img class="logo-light logo-img logo-img-lg" src="/assets/images/slbcoop-logo.jpeg" alt="logo">
+            <img class="logo-light logo-img logo-img-lg" src="/assets/images/logo.png" alt="logo">
             <img class="logo-dark ml-n4" style="width: 5em !important;"
-                 src="/assets/images/slbcoop-logo.jpeg" alt="logo-dark">
+                 src="/assets/images/logo.png" alt="logo-dark">
           </a>
         </div>
         <div class="nk-block-head">

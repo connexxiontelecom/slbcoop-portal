@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Cooperators Member's Portal for ICOOP">
   <!-- Fav Icon  -->
-  <link rel="shortcut icon" href="/assets/images/slbcoop-logo.jpeg">
+  <link rel="shortcut icon" href="/assets/images/logo.png">
   <!-- Page Title  -->
   <title><?= $page_title ?> | ICOOP Member's Portal </title>
   <!-- StyleSheets  -->

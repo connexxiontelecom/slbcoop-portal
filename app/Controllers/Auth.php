@@ -20,6 +20,7 @@ class Auth extends BaseController
   {
     // @TODO refactor method to use proper Request pattern
     extract($_POST);
+
     if ($staff_id && $password) {
       $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();
       if ($cooperator) {

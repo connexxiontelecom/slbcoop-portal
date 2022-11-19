@@ -1,7 +1,7 @@
 <div class="nk-footer nk-footer-fluid">
   <div class="container-fluid">
     <div class="nk-footer-wrap">
-      <div class="nk-footer-copyright"> &copy; <?= date('Y') ?> All rights reserved. Schlumberger Staff Credit &
+      <div class="nk-footer-copyright"> &copy; <?= date('Y') ?> All rights reserved. SLB Staff Credit &
         Investment Cooperative
         Society Limited.
       </div>

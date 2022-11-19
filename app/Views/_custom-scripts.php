@@ -25,6 +25,5 @@
       if (testDecimal.length > 1) currentVal = currentVal.slice(0, -1)
       $(this).val(replaceCommas(currentVal))
     })
-
   })
 </script>

@@ -112,7 +112,7 @@ class BaseController extends Controller
 
   // calculate the difference between total credits and total debits for all payments in the regular savings type
   // to determine the total regular savings amount
-  protected function _get_regular_savings_amount($staff_id): int
+  protected function _get_regular_savings_amount($staff_id)
   {
     $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
     $regular_savings_payment_details = $this->paymentDetailModel->get_all_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
@@ -122,12 +122,15 @@ class BaseController extends Controller
       if ($regular_savings_payment_detail->pd_drcrtype == 1) $total_cr += $regular_savings_payment_detail->pd_amount;
       if ($regular_savings_payment_detail->pd_drcrtype == 2) $total_dr += $regular_savings_payment_detail->pd_amount;
     }
+
     return $total_cr - $total_dr;
   }
 
   protected function _get_savings_types($staff_id): array
   {
+
     $payment_details = $this->paymentDetailModel->get_payment_details_by_staff_id($staff_id);
+
     $savings_types = array();
     foreach ($payment_details as $payment_detail) {
       $savings_type = $this->contributionTypeModel->where('contribution_type_id', $payment_detail->pd_ct_id)->first();
@@ -201,7 +204,9 @@ class BaseController extends Controller
 
   protected function _get_savings_types_amounts($staff_id): array
   {
+
     $savings_types = $this->_get_savings_types($staff_id);
+
     $savings_types_amounts = array();
     foreach ($savings_types as $savings_type) {
       $total_dr = 0;

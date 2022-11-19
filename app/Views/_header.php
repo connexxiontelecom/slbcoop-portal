@@ -21,7 +21,7 @@ $session = session();
               <em class="icon ni ni-card-view"></em>
             </div>
             <div class="nk-news-text">
-              <p>Schlumberger Staff Credit & Investment: <span>The Society was incorporated in May 1999 as an autonomous and voluntary organization</span>
+              <p>SLB Staff Credit & Investment: <span>The Society was incorporated in May 1999 as an autonomous and voluntary organization</span>
               </p>
               <em class="icon ni ni-external ml-1"></em>
             </div>
