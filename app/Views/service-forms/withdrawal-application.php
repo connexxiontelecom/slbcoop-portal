@@ -3,13 +3,13 @@ $session = session();
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
-<?php include(APPPATH.'/Views/_head.php'); ?>
+<?php include(APPPATH . '/Views/_head.php'); ?>
 <body class="nk-body npc-crypto bg-white has-sidebar">
 <div class="nk-app-root">
   <div class="nk-main">
-    <?php include(APPPATH.'/Views/_sidebar.php'); ?>
+    <?php include(APPPATH . '/Views/_sidebar.php'); ?>
     <div class="nk-wrap">
-      <?php include(APPPATH.'/Views/_header.php'); ?>
+      <?php include(APPPATH . '/Views/_header.php'); ?>
       <div class="nk-content nk-content-fluid">
         <div class="container-xl wide-lg">
           <div class="nk-content-body">
@@ -39,33 +39,38 @@ $session = session();
                           <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <label for="savings-type" class="form-label font-weight-bold">Savings Type <span class="text-danger"> *</span></label>
+                                <label for="savings-type" class="form-label font-weight-bold">Savings Type <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <select name="savings_type" id="savings-type" class="form-select form-control" required>
+                                  <select name="savings_type" id="savings-type" class="form-select form-control"
+                                          required <?php if (!$bank): ?>disabled<?php endif; ?>>
                                     <option value="default">Default Value</option>
-                                    <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type):?>
-                                      <option value="<?=$savings_type['contribution_type_id']?>">
-                                        <?=$savings_type['contribution_type_name']?>
+                                    <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type): ?>
+                                      <option value="<?= $savings_type['contribution_type_id'] ?>">
+                                        <?= $savings_type['contribution_type_name'] ?>
                                       </option>
-                                    <?php endforeach; endif;?>
+                                    <?php endforeach; endif; ?>
                                   </select>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label for="withdrawal-amount" class="form-label font-weight-bold">Withdrawal Amount <span class="text-danger"> *</span></label>
+                                <label for="withdrawal-amount" class="form-label font-weight-bold">Withdrawal Amount
+                                  <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control number" id="withdrawal-amount" name="withdrawal_amount" required disabled>
+                                  <input type="text" class="form-control number" id="withdrawal-amount"
+                                         name="withdrawal_amount" required disabled>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label class="form-label font-weight-bolder">File Attachment <span class="text-danger"> *</span></label>
+                                <label class="form-label font-weight-bolder">File Attachment</label>
                                 <div class="form-control-wrap">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="withdrawal-attachment" name="withdrawal_attachment" required disabled>
+                                    <input type="file" class="custom-file-input" id="withdrawal-attachment"
+                                           name="withdrawal_attachment" disabled>
                                     <label class="custom-file-label" for="withdrawal-attachment">Choose file</label>
                                   </div>
                                 </div>
@@ -87,20 +92,34 @@ $session = session();
                         <div class="preview-block">
                           <span class="preview-title-lg overline-title">Withdrawal Terms</span>
                         </div>
-                        <div class="alert alert-icon alert-info mt-1 mb-1" role="alert" id="get-started">
-                          <em class="icon ni ni-alert-circle"></em> Please select a savings type to get started.
-                        </div>
-                        <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="withdraw-details" hidden>
-                          <em class="icon ni ni-alert-circle"></em> These are the withdrawal details for your savings account
+                        <?php if (!$bank): ?>
+                          <div class="alert alert-icon alert-warning mt-1 mb-1" role="alert" id="get-started">
+                            <em class="icon ni ni-alert-circle"></em> Sorry, you have not updated your bank information
+                            and cannot proceed. Please, update your bank information details or contact the secretariat
+                          </div>
+                        <?php else: ?>
+                          <div class="alert alert-icon alert-info mt-1 mb-1" role="alert" id="get-started">
+                            <em class="icon ni ni-alert-circle"></em> Please select a savings type to get started.
+                          </div>
+                        <?php endif; ?>
+
+
+                        <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="withdraw-details"
+                             hidden>
+                          <em class="icon ni ni-alert-circle"></em> These are the withdrawal details for your savings
+                          account
                           <ul class="list list-sm list-checked pt-2" id="savings-details-list"></ul>
                         </div>
                         <!--withdrawal amount-->
-                        <div class="alert alert-icon alert-success mt-1 mb-1" role="alert" id="withdrawal-amount-passed" hidden>
+                        <div class="alert alert-icon alert-success mt-1 mb-1" role="alert" id="withdrawal-amount-passed"
+                             hidden>
                           <em class="icon ni ni-check-circle"></em> Your selected withdrawal amount is valid.
                           <div class="mt-1" id="withdrawal-amount-details"></div>
                         </div>
-                        <div class="alert alert-icon alert-warning mt-1 mb-1" role="alert" id="withdrawal-amount-failed" hidden>
-                          <em class="icon ni ni-alert-circle"></em><span class="font-weight-bolder">We're Sorry</span>. Your withdrawal amount exceeds the amount you can withdraw.
+                        <div class="alert alert-icon alert-warning mt-1 mb-1" role="alert" id="withdrawal-amount-failed"
+                             hidden>
+                          <em class="icon ni ni-alert-circle"></em><span class="font-weight-bolder">We're Sorry</span>.
+                          Your withdrawal amount exceeds the amount you can withdraw.
                         </div>
                       </div>
                     </div>
@@ -111,11 +130,11 @@ $session = session();
           </div>
         </div>
       </div>
-      <?php include(APPPATH.'/Views/_footer.php'); ?>
+      <?php include(APPPATH . '/Views/_footer.php'); ?>
     </div>
   </div>
 </div>
-<?php include(APPPATH.'/Views/_scripts.php'); ?>
-<?php include(APPPATH.'/Views/_withdrawal-application-script.php'); ?>
+<?php include(APPPATH . '/Views/_scripts.php'); ?>
+<?php include(APPPATH . '/Views/_withdrawal-application-script.php'); ?>
 </body>
 </html>

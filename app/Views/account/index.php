@@ -1,6 +1,10 @@
 <?php
-$session = session();
+//$session = session();
 //print_r($cooperator)
+$dob = '';
+if ($cooperator['cooperator_dob']) {
+  $dob = date_create($cooperator['cooperator_dob']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
@@ -48,7 +52,7 @@ $session = session();
                           <div class="nk-block-text">
                             <div class="user-avatar rounded md">
                             <span>
-                              <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
+                              <?= mb_substr($session->get('firstname'), 0, 1) . ' ' . mb_substr($session->get('lastname'), 0, 1) ?>
                             </span>
                             </div>
                           </div>
@@ -99,8 +103,12 @@ $session = session();
                   <div class="data-item">
                     <div class="data-col">
                       <span class="data-label">Date of Birth</span>
-                      <span
-                        class="data-value"><?= date_format(date_create($cooperator['cooperator_dob']), "d F, Y") ?></span>
+                      <?php if ($dob): ?>
+                        <span
+                          class="data-value"><?= date_format($dob, "d F, Y") ?></span>
+                      <?php else: ?>
+                        <span class="data-value">-</span>
+                      <?php endif ?>
                     </div>
                     <div></div>
                   </div><!-- .data-item -->
@@ -128,7 +136,11 @@ $session = session();
                   <div class="data-item">
                     <div class="data-col">
                       <span class="data-label">State</span>
-                      <span class="data-value"><?= $cooperator['state']['state_name'] ?></span>
+                      <?php if ($cooperator['state']): ?>
+                        <span class="data-value"><?= $cooperator['state']['state_name'] ?></span>
+                      <?php else: ?>
+                        <span class="data-value">-</span>
+                      <?php endif ?>
                     </div>
                     <div></div>
                   </div><!-- .data-item -->
@@ -140,21 +152,33 @@ $session = session();
                   <div class="data-item">
                     <div class="data-col">
                       <span class="data-label">Department</span>
-                      <span class="data-value"><?= $cooperator['department']['department_name'] ?></span>
+                      <?php if ($cooperator['department']): ?>
+                        <span class="data-value"><?= $cooperator['department']['department_name'] ?></span>
+                      <?php else: ?>
+                        <span class="data-value">-</span>
+                      <?php endif ?>
                     </div>
                     <div></div>
                   </div><!-- .data-item -->
                   <div class="data-item">
                     <div class="data-col">
                       <span class="data-label">Location</span>
-                      <span class="data-value"><?= $cooperator['location']['location_name'] ?></span>
+                      <?php if ($cooperator['location']): ?>
+                        <span class="data-value"><?= $cooperator['location']['location_name'] ?></span>
+                      <?php else: ?>
+                        <span class="data-value">-</span>
+                      <?php endif ?>
                     </div>
                     <div></div>
                   </div><!-- .data-item -->
                   <div class="data-item">
                     <div class="data-col">
                       <span class="data-label">Payroll Group</span>
-                      <span class="data-value"><?= $cooperator['payroll_group']['pg_name'] ?></span>
+                      <?php if ($cooperator['payroll_group']): ?>
+                        <span class="data-value"><?= $cooperator['payroll_group']['pg_name'] ?></span>
+                      <?php else: ?>
+                        <span class="data-value">-</span>
+                      <?php endif ?>
                     </div>
                     <div></div>
                   </div><!-- .data-item -->
@@ -173,7 +197,11 @@ $session = session();
                   <div class="data-item">
                     <div class="data-col">
                       <span class="data-label">Bank</span>
-                      <span class="data-value"><?= $cooperator['bank']['bank_name'] ?></span>
+                      <?php if ($cooperator['bank']): ?>
+                        <span class="data-value"><?= $cooperator['bank']['bank_name'] ?></span>
+                      <?php else: ?>
+                        <span class="data-value">-</span>
+                      <?php endif ?>
                     </div>
                     <div></div>
                   </div><!-- .data-item -->

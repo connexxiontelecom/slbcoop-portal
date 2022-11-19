@@ -61,7 +61,7 @@ $session = session();
                             <?= number_format($outstanding_loan['loan_balance'], 2) ?>
                           </td>
                           <td class="text-right">
-                            <?= number_format(0, 2) ?>
+                            <?= number_format($outstanding_loan['loan_encumbrance_amount'], 2) ?>
                           </td>
                           <td class="text-right">
                             <a

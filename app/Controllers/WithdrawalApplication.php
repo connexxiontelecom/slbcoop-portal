@@ -15,6 +15,7 @@ class WithdrawalApplication extends BaseController
       $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
       $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       $page_data['cooperator'] = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();;
+      $page_data['bank'] = $this->bankModel->where('bank_id', $page_data['cooperator']['cooperator_bank_id'])->first();
       return view('service-forms/withdrawal-application', $page_data);
     }
     return redirect('auth/login');
@@ -88,10 +89,6 @@ class WithdrawalApplication extends BaseController
                 $filename = $file->getRandomName();
                 $file->move('uploads/withdrawal-attachments', $filename);
                 // @TODO send file to admin service
-              } else {
-                $response_data['success'] = false;
-                $response_data['msg'] = 'The withdrawal attachment is required';
-                return $this->response->setJSON($response_data);
               }
               if (!$savings_type && $savings_type == 'default') {
                 $response_data['success'] = false;

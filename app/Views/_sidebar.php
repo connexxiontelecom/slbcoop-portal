@@ -6,7 +6,7 @@ $session = session();
   <div class="nk-sidebar-element nk-sidebar-head">
     <div class="nk-sidebar-brand">
       <a href="/dashboard" class="logo-link text-center">
-        <img class="logo-light logo-img" src="/assets/images/logo.png" alt="logo">
+        <!--        <img class="logo-light logo-img" src="/assets/images/logo.pngg" alt="logo">-->
         <img class="logo-dark logo-img" src="/assets/images/logo.png" alt="logo-dark">
         <!--        <span class="nio-version text-dark">Portal</span>-->
       </a>
