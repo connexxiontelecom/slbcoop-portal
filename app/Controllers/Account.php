@@ -64,4 +64,43 @@ class Account extends BaseController
     return $this->response->setJSON($response_data);
   }
 
+  function change_password()
+  {
+    if (!$this->session->active) {
+      return redirect('auth/login');
+    }
+    $post_data = $this->request->getPost();
+    $response_data = array();
+
+    if (!$post_data['current-password']) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'Current password is required';
+      return $this->response->setJSON($response_data);
+    }
+
+    $current_password = $post_data['current-password'];
+    $staff_id = $this->session->get('staff_id');
+    $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();
+
+    if (!password_verify($current_password, $cooperator['cooperator_password'])) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'The current password is invalid';
+      return $this->response->setJSON($response_data);
+    }
+
+    $password = $post_data['password'];
+    $confirm_password = $post_data['confirm-password'];
+    if ($password !== $confirm_password) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'The new password does not match confirm password';
+      return $this->response->setJSON($response_data);
+    }
+
+    $cooperator_data = ['cooperator_id' => $cooperator['cooperator_id'], 'cooperator_password' => password_hash($password, PASSWORD_DEFAULT)];
+    $this->cooperatorModel->save($cooperator_data);
+    $response_data['success'] = true;
+    $response_data['msg'] = 'Password changed successfully!';
+    return $this->response->setJSON($response_data);
+  }
+
 }

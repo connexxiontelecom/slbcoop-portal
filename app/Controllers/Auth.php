@@ -55,10 +55,9 @@ class Auth extends BaseController
 //		      print_r($this->_get_savings_types_amounts($user_data['staff_id']));
           return redirect('dashboard');
         }
-      } else {
-        $this->session->setFlashdata('login_failure', 'Invalid login credentials!');
-        return redirect('auth/login');
       }
+      $this->session->setFlashdata('login_failure', 'Invalid login credentials!');
+      return redirect('auth/login');
     }
   }
 

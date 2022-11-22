@@ -67,6 +67,7 @@ $routes->get('notifications/view-notification/(:num)', 'Notifications::view_noti
 
 $routes->get('account', 'Account::index');
 $routes->post('account/upload-display-picture', 'Account::upload_display_picture');
+$routes->post('account/change-password', 'Account::change_password');
 $routes->get('security', 'Account::security');
 
 $routes->get('auth/login', 'Auth::login');

@@ -40,7 +40,7 @@ if ($cooperator['cooperator_dob']) {
                   <div class="nk-block-head-content">
                     <h5 class="nk-block-title">Personal Information</h5>
                     <div class="nk-block-des">
-                      <p>Basic and official information that you use on Schlumberger Staff Coop.</p>
+                      <p>Basic and official information that you use on SLB Staff Coop.</p>
                     </div>
                   </div>
                 </div><!-- .nk-block-head -->
