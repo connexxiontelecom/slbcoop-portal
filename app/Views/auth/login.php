@@ -71,13 +71,14 @@
           <div class="slider-item">
             <div class="nk-feature nk-feature-center">
               <div class="nk-feature-img">
-                <img class="round" src="/assets/images/slides/slide-4.png" alt="">
+                <img class="round" src="/assets/images/slides/slide-7.png" alt="">
               </div>
               <div class="nk-feature-content py-4 p-sm-5">
                 <h4>SLB Staff Coop</h4>
                 <p>
                   Get in touch today for more information on your benefits. <br>
-                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
+                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbcoop.com"
+                                                               target="_blank">slbcoop.com</a>
                   <br>
                   <em class="icon ni ni-call-alt mr-1"></em> <a href="tel:+2348090160565">+234 (0) 809 016 0565</a>
                 </p>
@@ -87,13 +88,14 @@
           <div class="slider-item">
             <div class="nk-feature nk-feature-center">
               <div class="nk-feature-img">
-                <img class="round" src="/assets/images/slides/slide-5.png" alt="">
+                <img class="round" src="/assets/images/slides/slide-8.png" alt="">
               </div>
               <div class="nk-feature-content py-4 p-sm-5">
                 <h4>SLB Staff Coop</h4>
                 <p>
                   Get in touch today for more information on your benefits. <br>
-                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
+                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbcoop.com"
+                                                               target="_blank">slbcoop.com</a>
                   <br>
                   <em class="icon ni ni-call-alt mr-1"></em> <a href="tel:+2348090160565">+234 (0) 809 016 0565</a>
                 </p>
@@ -103,13 +105,14 @@
           <div class="slider-item">
             <div class="nk-feature nk-feature-center">
               <div class="nk-feature-img">
-                <img class="round" src="/assets/images/slides/slide-6.png" alt="">
+                <img class="round" src="/assets/images/slides/slide-9.png" alt="">
               </div>
               <div class="nk-feature-content py-4 p-sm-5">
                 <h4>SLB Staff Coop</h4>
                 <p>
                   Get in touch today for more information on your benefits. <br>
-                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
+                  <em class="icon ni ni-browser mr-1"></em> <a href="https://slbcoop.com"
+                                                               target="_blank">slbcoop.com</a>
                   <br>
                   <em class="icon ni ni-call-alt mr-1"></em> <a href="tel:+2348090160565">+234 (0) 809 016 0565</a>
                 </p>
