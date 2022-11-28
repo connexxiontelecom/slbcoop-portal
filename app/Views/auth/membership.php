@@ -20,7 +20,7 @@
           <div class="kyc-app wide-sm m-auto">
             <div class="nk-block-head nk-block-head-lg wide-xl mx-auto">
               <div class="nk-block-head-content text-center">
-                <h2 class="nk-block-title fw-normal">Schlumberger Staff Coop Membership Form</h2>
+                <h2 class="nk-block-title fw-normal">SLB Staff Coop Membership Form</h2>
                 <div class="nk-block-des">
                   <p>To complete registration on the platform, each coop member will have to go through identity
                     verification. Our team will get back to you with a response once the process is completed.</p>

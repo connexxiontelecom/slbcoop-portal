@@ -73,5 +73,85 @@
         })
       }
     })
+
+    $('form#update-bank-form').submit(function (e) {
+      e.preventDefault()
+      let bankId = $('#application_bank_id').val()
+      let accountNumber = $('#application_account_number').val()
+      let branch = $('#application_bank_branch').val()
+      let sort = $('#application_sort_code').val()
+
+      if (!bankId || !accountNumber || !branch || !sort) {
+        Swal.fire("Invalid Submission", 'Please fill in all required fields!', "error")
+      } else {
+        const fd = new FormData(this)
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Update bank information',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Confirm Update'
+        }).then(function (result) {
+          if (result.value) {
+            $.ajax({
+              url: '<?= site_url('account/update-bank')?>',
+              type: 'post',
+              data: fd,
+              success: function (data) {
+                if (data.success) {
+                  Swal.fire('Confirmed!', data.msg, 'success').then(() => location.reload())
+                } else {
+                  Swal.fire('Sorry!', data.msg, 'error')
+                }
+              },
+              cache: false,
+              contentType: false,
+              processData: false
+            })
+          }
+        })
+      }
+    })
+
+    $('form#update-nok').submit(function (e) {
+      e.preventDefault()
+      const name = $('#cooperator_kin_fullname').val()
+      const relationship = $('#cooperator_kin_relationship').val()
+      const email = $('#cooperator_kin_email').val()
+      const phone = $('#cooperator_kin_phone').val()
+      const percentage = $('#cooperator_kin_percentage').val()
+      const address = $('#cooperator_kin_address').val()
+
+      if (!name || !relationship || !email || !phone || !percentage || !address) {
+        Swal.fire("Invalid Submission", 'Please fill in all required fields!', "error")
+      } else {
+        const fd = new FormData(this)
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Update next of kin information',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Confirm Update'
+        }).then(function (result) {
+          if (result.value) {
+            $.ajax({
+              url: '<?= site_url('account/update-nok')?>',
+              type: 'post',
+              data: fd,
+              success: function (data) {
+                if (data.success) {
+                  Swal.fire('Confirmed!', data.msg, 'success').then(() => location.reload())
+                } else {
+                  Swal.fire('Sorry!', data.msg, 'error')
+                }
+              },
+              cache: false,
+              contentType: false,
+              processData: false
+            })
+          }
+        })
+      }
+    })
   })
 </script>

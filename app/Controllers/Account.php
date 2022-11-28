@@ -17,6 +17,7 @@ class Account extends BaseController
       $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
       $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
       $page_data['cooperator'] = $cooperator;
+      $page_data['banks'] = $this->bankModel->findAll();
       return view('account/index', $page_data);
     }
     return redirect('auth/login');
@@ -100,6 +101,62 @@ class Account extends BaseController
     $this->cooperatorModel->save($cooperator_data);
     $response_data['success'] = true;
     $response_data['msg'] = 'Password changed successfully!';
+    return $this->response->setJSON($response_data);
+  }
+
+  function update_bank()
+  {
+    if (!$this->session->active) {
+      return redirect('auth/login');
+    }
+    $staff_id = $this->session->get('staff_id');
+    $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();
+    if ($cooperator['cooperator_profile_lock']) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'You currently cannot update your bank information. Please, contact support.';
+      return $this->response->setJSON($response_data);
+    }
+    $post_data = $this->request->getPost();
+    $cooperator_data = [
+      'cooperator_id' => $cooperator['cooperator_id'],
+      'cooperator_bank_id' => $post_data['application_bank_id'],
+      'cooperator_account_number' => $post_data['application_account_number'],
+      'cooperator_bank_branch' => $post_data['application_bank_branch'],
+      'cooperator_sort_code' => $post_data['application_sort_code'],
+      'cooperator_profile_lock' => 1
+    ];
+    $this->cooperatorModel->save($cooperator_data);
+    $response_data['success'] = true;
+    $response_data['msg'] = 'Bank updated successfully!';
+    return $this->response->setJSON($response_data);
+  }
+
+  function update_nok()
+  {
+    if (!$this->session->active) {
+      return redirect('auth/login');
+    }
+    $staff_id = $this->session->get('staff_id');
+    $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();
+    if ($cooperator['cooperator_profile_lock']) {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'You currently cannot update your next of kin information. Please, contact support.';
+      return $this->response->setJSON($response_data);
+    }
+    $post_data = $this->request->getPost();
+    $cooperator_data = [
+      'cooperator_id' => $cooperator['cooperator_id'],
+      'cooperator_kin_fullname' => $post_data['cooperator_kin_fullname'],
+      'cooperator_kin_relationship' => $post_data['cooperator_kin_relationship'],
+      'cooperator_kin_email' => $post_data['cooperator_kin_email'],
+      'cooperator_kin_phone' => $post_data['cooperator_kin_phone'],
+      'cooperator_kin_percentage' => $post_data['cooperator_kin_percentage'],
+      'cooperator_kin_address' => $post_data['cooperator_kin_address'],
+      'cooperator_profile_lock' => 1
+    ];
+    $this->cooperatorModel->save($cooperator_data);
+    $response_data['success'] = true;
+    $response_data['msg'] = 'Next of kin updated successfully!';
     return $this->response->setJSON($response_data);
   }
 

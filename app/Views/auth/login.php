@@ -71,10 +71,10 @@
           <div class="slider-item">
             <div class="nk-feature nk-feature-center">
               <div class="nk-feature-img">
-                <img class="round" src="/assets/images/slides/slide-1.png" alt="">
+                <img class="round" src="/assets/images/slides/slide-4.png" alt="">
               </div>
               <div class="nk-feature-content py-4 p-sm-5">
-                <h4>Schlumberger Staff Coop</h4>
+                <h4>SLB Staff Coop</h4>
                 <p>
                   Get in touch today for more information on your benefits. <br>
                   <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
@@ -87,10 +87,10 @@
           <div class="slider-item">
             <div class="nk-feature nk-feature-center">
               <div class="nk-feature-img">
-                <img class="round" src="/assets/images/slides/slide-2.png" alt="">
+                <img class="round" src="/assets/images/slides/slide-5.png" alt="">
               </div>
               <div class="nk-feature-content py-4 p-sm-5">
-                <h4>Schlumberger Staff Coop</h4>
+                <h4>SLB Staff Coop</h4>
                 <p>
                   Get in touch today for more information on your benefits. <br>
                   <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>
@@ -103,10 +103,10 @@
           <div class="slider-item">
             <div class="nk-feature nk-feature-center">
               <div class="nk-feature-img">
-                <img class="round" src="/assets/images/slides/slide-3.png" alt="">
+                <img class="round" src="/assets/images/slides/slide-6.png" alt="">
               </div>
               <div class="nk-feature-content py-4 p-sm-5">
-                <h4>Schlumberger Staff Coop</h4>
+                <h4>SLB Staff Coop</h4>
                 <p>
                   Get in touch today for more information on your benefits. <br>
                   <em class="icon ni ni-browser mr-1"></em> <a href="https://slbstaffcoop.com" target="_blank">slbstaffcoop.com</a>

@@ -64,10 +64,11 @@ if ($cooperator['cooperator_dob']) {
                         <?php endif; ?>
                         <div class="nk-block-actions flex-shrink-sm-0">
                           <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
-                            <li class="order-md-last">
+                            <li class="ml-4 order-md-last">
                               <a href="javascript:void(0)" data-toggle="modal" data-target="#profile-edit"
-                                 class="btn btn-primary">Upload
-                                Display Picture</a>
+                                 class="btn btn-primary">
+                                Update Profile
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -282,28 +283,187 @@ if ($cooperator['cooperator_dob']) {
     <div class="modal-content">
       <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
       <div class="modal-body modal-body-lg">
-        <h5 class="title">Upload Display Picture</h5>
-        <form enctype="multipart/form-data" class="form-validate" id="display-picture">
-          <div class="row gy-4 pt-5">
-            <div class="col-12">
-              <div class="form-group">
-                <label class="form-label font-weight-bolder">Display Picture <span class="text-danger"> *</span></label>
-                <div class="form-control-wrap">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="dp" name="dp" accept="image/*" required>
-                    <label class="custom-file-label" for="dp">Choose file</label>
+        <h5 class="title">Update Profile</h5>
+        <ul class="nk-nav nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#picture">Display Picture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#bank">Bank</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#nok">Next of Kin</a>
+          </li>
+        </ul><!-- .nav-tabs -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="picture">
+            <form enctype="multipart/form-data" class="form-validate" id="display-picture">
+              <div class="row gy-4">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-label font-weight-bolder">Display Picture <span
+                        class="text-danger"> *</span></label>
+                    <div class="form-control-wrap">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="dp" name="dp" accept="image/*" required>
+                        <label class="custom-file-label" for="dp">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group mt-3">
+                    <button class="btn btn-primary">Upload Picture</button>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group mt-3">
-                <button class="btn btn-primary">Upload Picture</button>
-              </div>
-            </div>
-          </div>
-        </form><!-- .tab-pane -->
+            </form><!-- .tab-pane -->
 
+          </div><!-- .tab-pane -->
+          <div class="tab-pane" id="bank">
+            <form class="row gy-4 form-validate" id="update-bank-form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="application_bank_id">Bank <span class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <select class="form-control form-select" data-search="on" name="application_bank_id"
+                            id="application_bank_id" required>
+                      <?php foreach ($banks as $bank): ?>
+                        <option
+                          value="<?= $bank['bank_id']; ?>"><?= $bank['bank_name']; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="application_account_number">Account Number <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="text" class="form-control" name="application_account_number"
+                           id="application_account_number" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="application_bank_branch">Bank Branch <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="text" class="form-control" name="application_bank_branch"
+                           id="application_bank_branch" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="application_sort_code">Sort Code <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="text" class="form-control" name="application_sort_code"
+                           id="application_sort_code" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                  <li>
+                    <button class="btn btn-primary">Update Bank</button>
+                  </li>
+                  <li>
+                    <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div><!-- .tab-pane -->
+          <div class="tab-pane" id="nok">
+            <form class="row gy-4 form-validate" id="update-nok">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="cooperator_kin_fullname">Full Name <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="text" class="form-control" name="cooperator_kin_fullname"
+                           id="cooperator_kin_fullname" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="cooperator_kin_relationship">Relationship <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <select class="form-control form-select" data-search="on"
+                            name="cooperator_kin_relationship"
+                            id="cooperator_kin_relationship" required>
+                      <option
+                        value="sibling">Sibling
+                      </option>
+                      <option
+                        value="spouse">Spouse
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="cooperator_kin_email">Email Address <span class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="email" class="form-control" name="cooperator_kin_email"
+                           id="cooperator_kin_email" required
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="cooperator_kin_phone">Phone Number <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="text" class="form-control" name="cooperator_kin_phone"
+                           id="cooperator_kin_phone" required
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" for="cooperator_kin_percentage">Percentage <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                    <input type="number" class="form-control" name="cooperator_kin_percentage"
+                           id="cooperator_kin_percentage" required
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="form-label" for="cooperator_kin_address">Address <span
+                      class="text-danger">*</span></label>
+                  <div class="form-control-group">
+                            <textarea class="form-control no-resize" name="cooperator_kin_address"
+                                      id="cooperator_kin_address" rows="1" required
+                            ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                  <li>
+                    <button class="btn btn-primary">Update Next of Kin</button>
+                  </li>
+                  <li>
+                    <a href="#" data-dismiss="modal" class="link link-light">Cancel</a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div><!-- .tab-pane -->
+        </div><!-- .tab-content -->
       </div><!-- .modal-body -->
     </div><!-- .modal-content -->
   </div><!-- .modal-dialog -->
