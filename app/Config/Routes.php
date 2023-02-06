@@ -3,12 +3,14 @@
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
+use App\Controllers\Auth;
+
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
 if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
-  require SYSTEMPATH . 'Config/Routes.php';
+    require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /**
@@ -74,8 +76,12 @@ $routes->get('security', 'Account::security');
 
 $routes->get('auth/login', 'Auth::login');
 $routes->get('auth/membership', 'Auth::membership');
+$routes->get('auth/forgot-password', 'Auth::forgot_password');
 $routes->post('login', 'Auth::auth_login');
 $routes->post('membership', 'Auth::auth_membership');
+$routes->post('forgot-password', 'Auth::auth_forgot_password');
+$routes->get('auth/reset-password/(:any)', 'Auth::reset_password/$1');
+$routes->post('reset-password', 'Auth::auth_reset_password');
 $routes->get('logout', 'Auth::logout');
 
 
@@ -93,5 +99,5 @@ $routes->get('logout', 'Auth::logout');
  * needing to reload it.
  */
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

@@ -20,48 +20,28 @@
                 </div>
                 <div class="nk-block-head">
                     <div class="nk-block-head-content">
-                        <h5 class="nk-block-title">Login</h5>
+                        <h5 class="nk-block-title">Forgot Password</h5>
                         <div class="nk-block-des">
-                            <p>Access the Member's Portal using your credentials.</p>
+                            <p>Enter your email below to request a reset password link.</p>
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->
-                <form class="form-validate" action="<?= site_url('login') ?>" method="post">
+                <form class="form-validate" action="<?= site_url('forgot-password') ?>" method="post">
                     <div class="form-group">
                         <div class="form-label-group">
-                            <label class="form-label" for="default-01">Staff ID</label>
+                            <label class="email" for="default-01">Email</label>
                         </div>
-                        <input autocomplete="off" type="text" class="form-control form-control-lg" id="default-01"
-                               name="staff_id"
-                               placeholder="Enter your staff id" required>
+                        <input autocomplete="off" type="email" class="form-control form-control-lg" id="email"
+                               name="email"
+                               placeholder="Enter your email" required>
                     </div><!-- .form-group -->
                     <div class="form-group">
-                        <div class="form-label-group">
-                            <label class="form-label" for="password">Password</label>
-                            <a class="link link-primary link-sm" tabindex="-1"
-                               href="<?= site_url('auth/forgot-password') ?>">Forgot Password?</a>
-                        </div>
-                        <div class="form-control-wrap">
-                            <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch"
-                               data-target="password">
-                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
-                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
-                            </a>
-                            <input autocomplete="off" type="password" class="form-control form-control-lg" id="password"
-                                   name="password" placeholder="Enter your passcode" required>
-                        </div>
-                    </div><!-- .foem-group -->
-                    <div class="form-group">
-                        <input type="hidden" class="invalid-login"/>
-                        <input type="hidden" class="reset_success"/>
-                        <input type="hidden" class="invalid_token"/>
-                        <input type="hidden" class="reset_success_final"/>
-                        <button class="btn btn-lg btn-primary btn-block">Login</button>
+                        <input type="hidden" class="invalid-email"/>
+                        <button class="btn btn-lg btn-primary btn-block">Reset Password</button>
                     </div>
                 </form><!-- form -->
                 <div class="form-note-s2 pt-4"> New on our platform? <a href="/auth/membership">Fill & submit
-                        the
-                        membership form here</a>
+                        the membership form here</a>
                 </div>
             </div><!-- .nk-block -->
             <div class="nk-block nk-auth-footer">
@@ -138,24 +118,9 @@
 </div><!-- app body @e -->
 <!-- JavaScript -->
 <?php include(APPPATH . '/Views/_scripts.php'); ?>
-<?php if (session()->getFlashdata('login_failure') !== NULL) : ?>
+<?php if (session()->getFlashdata('invalid') !== NULL) : ?>
     <script>
-        $('.invalid-login').click()
-    </script>
-<?php endif; ?>
-<?php if (session()->getFlashdata('reset_success') !== NULL) : ?>
-    <script>
-        $('.reset_success').click()
-    </script>
-<?php endif; ?>
-<?php if (session()->getFlashdata('invalid_token') !== NULL) : ?>
-    <script>
-        $('.invalid_token').click()
-    </script>
-<?php endif; ?>
-<?php if (session()->getFlashdata('reset_success_final') !== NULL) : ?>
-    <script>
-        $('.reset_success_final').click()
+        $('.invalid-email').click()
     </script>
 <?php endif; ?>
 </body>
