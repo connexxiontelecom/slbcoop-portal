@@ -45,9 +45,15 @@ class WithdrawalApplication extends BaseController
             $max_withdrawal = $policy_config['max_withdrawal_amount'];
             $withdrawal_charge = $policy_config['savings_withdrawal_charge'];
             $minimum_savings = $policy_config['minimum_saving'];
+            $outstanding_loans = $this->_get_user_loans(0);
+            $cumulative_loan_balance = 0;
+            foreach ($outstanding_loans as $loan) {
+                $cumulative_loan_balance += $loan['loan_balance'];
+            }
             if ($savings_amount) {
-                $withdrawal_amount = ($max_withdrawal / 100) * $actual_savings_amount;
-                $withdrawal_amount = $withdrawal_amount - $minimum_savings;
+                $cumulative_amount = $cumulative_loan_balance * ($max_withdrawal / 100);
+                $resultant_amount = $cumulative_amount + $minimum_savings;
+                $withdrawal_amount = $actual_savings_amount - $resultant_amount;
                 $withdrawable_amount = $withdrawal_amount * (1 - ($withdrawal_charge / 100));
             }
             $response_data = [
