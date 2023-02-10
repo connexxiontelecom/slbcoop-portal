@@ -125,7 +125,7 @@ class WithdrawalApplication extends BaseController
                                 'withdraw_charges' => $withdrawal_charges,
                                 'withdraw_date' => date('Y-m-d'),
                                 'withdraw_status' => 0,
-                                'withdraw_doc' => $filename,
+                                'withdraw_doc' => $filename ?? null,
                             );
                             $this->withdrawModel->save($withdrawal_application_data);
                             $response_data['success'] = true;
