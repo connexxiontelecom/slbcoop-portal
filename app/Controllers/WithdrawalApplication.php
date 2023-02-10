@@ -39,7 +39,8 @@ class WithdrawalApplication extends BaseController
                 }
             }
             $savings_amount = $this->_get_savings_type_amount($staff_id, $savings_type);
-            $actual_savings_amount = $savings_amount - $encumbered_amount;
+//            $actual_savings_amount = $savings_amount - $encumbered_amount;
+            $actual_savings_amount = $savings_amount;
             $withdrawable_amount = 0;
             $policy_config = $this->policyConfigModel->first();
             $max_withdrawal = $policy_config['max_withdrawal_amount'];
