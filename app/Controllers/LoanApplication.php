@@ -218,6 +218,15 @@ class LoanApplication extends BaseController
             $months = $diff->format('%r%m');
             $months_difference = $yearsInMonths + $months;
 
+            // check if there is an outstanding loan in this loan type
+            $existing_loan = $this->loanModel
+                ->where(['loan_type' => $loan_setup_id, 'paid_back' => 0])
+                ->first();
+            if ($existing_loan) {
+                $response_data['success'] = false;
+                $response_data['msg'] = 'You have an outstanding loan of this loan type';
+                return $response_data;
+            }
 
             if ($months_difference <= $loan_setup_details['age_qualification']) {
                 $response_data['success'] = false;
@@ -275,6 +284,7 @@ class LoanApplication extends BaseController
                 'waiver' => $waiver_charge,
                 'encumbrance_amount' => $allowed_loan
             );
+
             $loan_application_id = $this->loanApplicationModel->insert($loan_application_data);
             if ($guarantor_1 && $guarantor_2) {
                 $this->_update_loan_guarantors($loan_application_id, $guarantor_1, $staff_id);
