@@ -86,8 +86,8 @@ class LoanApplication extends BaseController
                         $loan_setup_id = $post_data['loan_type'];
                         $loan_duration = $post_data['loan_duration'];
                         $loan_amount = $post_data['loan_amount'];
-                        $guarantor_1 = $post_data['guarantor_1'];
-                        $guarantor_2 = $post_data['guarantor_2'];
+                        $guarantor_1 = $post_data['guarantor_1'] ?? null;
+                        $guarantor_2 = $post_data['guarantor_2'] ?? null;
                         $filename = null;
                         $file = $this->request->getFile('loan_attachment');
                         if ($file->isValid() && !$file->hasMoved()) {
@@ -276,8 +276,10 @@ class LoanApplication extends BaseController
                 'encumbrance_amount' => $allowed_loan
             );
             $loan_application_id = $this->loanApplicationModel->insert($loan_application_data);
-            $this->_update_loan_guarantors($loan_application_id, $guarantor_1, $staff_id);
-            $this->_update_loan_guarantors($loan_application_id, $guarantor_2, $staff_id);
+            if ($guarantor_1 && $guarantor_2) {
+                $this->_update_loan_guarantors($loan_application_id, $guarantor_1, $staff_id);
+                $this->_update_loan_guarantors($loan_application_id, $guarantor_2, $staff_id);
+            }
             $response_data['success'] = true;
             $response_data['msg'] = 'You have successfully applied for a ' . number_format($loan_amount, 2) . '
        amount loan for ' . $loan_duration . ' months. Your chosen guarantors have been notified for their approval.';

@@ -17,6 +17,7 @@
     let encumbranceAmount = <?=$encumbrance_amount?>;
     let freeSavingsBalance = 0
     let waiverCharge = 0
+    let requiresGuarantor
 
     $(document).ready(function () {
         // Perform all these actions when user selects the loan type
@@ -29,6 +30,8 @@
                     url: 'loan-application/get-loan-setup-details/' + loanType,
                     success: function (response) {
                         let loanSetupDetails = JSON.parse(response)
+                        console.log({loanSetupDetails})
+                        requiresGuarantor = parseInt(loanSetupDetails.requires_guarantor)
                         loanDuration = loanSetupDetails.max_repayment_periods
                         loanMaxCreditLimit = loanSetupDetails.max_credit_limit
                         loanMinCreditLimit = loanSetupDetails.min_credit_limit
@@ -44,21 +47,28 @@
                         else if (loanSetupDetails.interest_charge_type == 2) loanInterestChargeType = 'Monthly'
                         else if (loanSetupDetails.interest_charge_type == 3) loanInterestChargeType = 'Yearly'
 
+                        if (!requiresGuarantor) {
+                            $('#guarantor-message').attr('hidden', false)
+                            $('#guarantor-block').attr('hidden', true)
+                        } else {
+                            $('#guarantor-message').attr('hidden', true)
+                            $('#guarantor-block').attr('hidden', false)
+                        }
 
                         $('#loan-details-list').html(`
-              <li>${loanInterestRate}% Interest Rate</li>
-              <li>${loanInterestMethod} Interest Method</li>
-              <li>${loanInterestChargeType} Interest Charge Type</li>
-            `)
+                          <li>${loanInterestRate}% Interest Rate</li>
+                          <li>${loanInterestMethod} Interest Method</li>
+                          <li>${loanInterestChargeType} Interest Charge Type</li>
+                        `)
                         $('#loan-type-note').html(`Loan Qualification Period <span class="text-primary">${loanAgeQualification} month(s)</span>`)
                         $('#loan-duration-note').html(`Maximum Repayment Period <span class="text-primary">${loanDuration} month(s)</span>`)
                         $('#loan-amount-note').html(`
-              Minimum Credit Limit <span class="text-primary">${loanMinCreditLimit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} </span>
-              ---
-              Maximum Credit Limit <span class="text-primary">${loanMaxCreditLimit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} </span>
-              ---
-              Loan PSR <span class="text-primary">${loanPSRValue} % </span>
-            `)
+                          Minimum Credit Limit <span class="text-primary">${loanMinCreditLimit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} </span>
+                          ---
+                          Maximum Credit Limit <span class="text-primary">${loanMaxCreditLimit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} </span>
+                          ---
+                          Loan PSR <span class="text-primary">${loanPSRValue} % </span>
+                        `)
                         $('#get-started').attr('hidden', true)
                         $('#loan-details').attr('hidden', false)
                         if (monthsDifference > loanAgeQualification) {
@@ -237,7 +247,9 @@
 
             if (!loanType || loanType === 'default') {
                 Swal.fire("Invalid Submission", "Please select a valid loan type!", "error");
-            } else if (!loanDuration || !loanAmount || !guarantor1 || !guarantor2) {
+            } else if (!loanDuration || !loanAmount) {
+                Swal.fire("Invalid Submission", "Please fill in all required fields!", "error");
+            } else if (requiresGuarantor && (!guarantor1 || !guarantor2)) {
                 Swal.fire("Invalid Submission", "Please fill in all required fields!", "error");
             } else {
                 const formData = new FormData(this)

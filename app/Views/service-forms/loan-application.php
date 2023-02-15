@@ -105,7 +105,12 @@ $session = session();
                                                     <div class="preview-block">
                                                         <span class="preview-title-lg overline-title mt-5">Guarantor Details</span>
                                                     </div>
-                                                    <div class="row gy-3">
+                                                    <div class="alert alert-icon alert-info mt-1 mb-1" role="alert"
+                                                         id="guarantor-message" hidden>
+                                                        <em class="icon ni ni-alert-circle"></em>
+                                                        You do not require guarantors for this loan type.
+                                                    </div>
+                                                    <div class="row gy-3" id="guarantor-block">
                                                         <div class="col-12">
                                                             <div class="form-group mt-3">
                                                                 <label class="form-label font-weight-bolder"
@@ -130,6 +135,8 @@ $session = session();
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="row gy-3">
                                                         <div class="col-12">
                                                             <div class="form-group mt-3">
                                                                 <button class="btn btn-primary">Submit Application
