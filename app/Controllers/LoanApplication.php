@@ -220,7 +220,7 @@ class LoanApplication extends BaseController
 
             // check if there is an outstanding loan in this loan type
             $existing_loan = $this->loanModel
-                ->where(['loan_type' => $loan_setup_id, 'paid_back' => 0])
+                ->where(['staff_id' => $staff_id, 'loan_type' => $loan_setup_id, 'paid_back' => 0, 'disburse' => 1])
                 ->first();
             if ($existing_loan) {
                 $response_data['success'] = false;
