@@ -23,7 +23,8 @@ class LoanApplication extends BaseController
             $page_data['regular_savings'] = $this->_get_regular_savings_amount($staff_id);
             $page_data['savings_types_amounts_list'] = $this->_get_savings_types_amounts($staff_id);
             $page_data['cooperator'] = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();
-            $page_data['bank'] = $this->bankModel->where('bank_id', $page_data['cooperator']['cooperator_bank_id'])->first();
+            $page_data['bank'] = $this->bankModel->where('bank_id',
+              $page_data['cooperator']['cooperator_bank_id'])->first();
             return view('service-forms/loan-application', $page_data);
         }
         return redirect('auth/login');
@@ -78,37 +79,41 @@ class LoanApplication extends BaseController
             $staff_id = $this->session->get('staff_id');
             $staff_status = $this->session->get('status');
             $response_data = array();
-            $account_closure = $this->accountClosureModel->check_account_closure($staff_id);
-            if (empty($account_closure)) {
-                if ($staff_status == 2) {
-                    $post_data = $this->request->getPost();
-                    if ($post_data) {
-                        $loan_setup_id = $post_data['loan_type'];
-                        $loan_duration = $post_data['loan_duration'];
-                        $loan_amount = $post_data['loan_amount'];
-                        $guarantor_1 = $post_data['guarantor_1'] ?? null;
-                        $guarantor_2 = $post_data['guarantor_2'] ?? null;
-                        $filename = null;
-                        $file = $this->request->getFile('loan_attachment');
-                        if ($file->isValid() && !$file->hasMoved()) {
+
+            if ($staff_status == 2) {
+                $post_data = $this->request->getPost();
+                if ($post_data) {
+                    $loan_setup_id = $post_data['loan_type'];
+                    $loan_duration = $post_data['loan_duration'];
+                    $loan_amount = $post_data['loan_amount'];
+                    $guarantor_1 = $post_data['guarantor_1'] ?? null;
+                    $guarantor_2 = $post_data['guarantor_2'] ?? null;
+                    $filename = null;
+                    $file = $this->request->getFile('loan_attachment');
+                    if ($file->isValid() && !$file->hasMoved()) {
 //                $extension = $file->guessExtension();
-                            $filename = $file->getRandomName();
-                            $file->move('uploads/loan-attachments', $filename);
-                            // @TODO send file to admin service
-                        }
-                        $response_data = $this->_submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename);
-                        return $this->response->setJSON($response_data);
+                        $filename = $file->getRandomName();
+                        $file->move('uploads/loan-attachments', $filename);
+                        // @TODO send file to admin service
                     }
-                } else {
-                    $response_data['success'] = false;
-                    $response_data['msg'] = 'Your account is currently frozen';
+                    $response_data = $this->_submit_loan_application($loan_setup_id, $loan_amount, $loan_duration,
+                      $guarantor_1, $guarantor_2, $filename);
                     return $this->response->setJSON($response_data);
                 }
             } else {
                 $response_data['success'] = false;
-                $response_data['msg'] = 'Your account is currently undergoing closure';
+                $response_data['msg'] = 'Your account is currently frozen';
                 return $this->response->setJSON($response_data);
             }
+
+//            $account_closure = $this->accountClosureModel->check_account_closure($staff_id);
+//            if (empty($account_closure)) {
+//
+//            } else {
+//                $response_data['success'] = false;
+//                $response_data['msg'] = 'Your account is currently undergoing closure';
+//                return $this->response->setJSON($response_data);
+//            }
             return $this->response->setJSON($response_data);
         }
         return redirect('auth/login');
@@ -186,8 +191,14 @@ class LoanApplication extends BaseController
         return redirect('auth/login');
     }
 
-    private function _submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename): array
-    {
+    private function _submit_loan_application(
+      $loan_setup_id,
+      $loan_amount,
+      $loan_duration,
+      $guarantor_1,
+      $guarantor_2,
+      $filename
+    ): array {
         $staff_id = $this->session->get('staff_id');
         $firstname = $this->session->get('firstname');
         $lastname = $this->session->get('lastname');
@@ -220,8 +231,8 @@ class LoanApplication extends BaseController
 
             // check if there is an outstanding loan in this loan type
             $existing_loan = $this->loanModel
-                ->where(['staff_id' => $staff_id, 'loan_type' => $loan_setup_id, 'paid_back' => 0, 'disburse' => 1])
-                ->first();
+              ->where(['staff_id' => $staff_id, 'loan_type' => $loan_setup_id, 'paid_back' => 0, 'disburse' => 1])
+              ->first();
             if ($existing_loan) {
                 $response_data['success'] = false;
                 $response_data['msg'] = 'You have an outstanding loan of this loan type';
@@ -272,17 +283,17 @@ class LoanApplication extends BaseController
                 }
             }
             $loan_application_data = array(
-                'staff_id' => $staff_id,
-                'name' => $firstname . ' ' . $othername . ' ' . $lastname,
-                'guarantor' => $guarantor_1,
-                'guarantor_2' => $guarantor_2,
-                'loan_type' => $loan_setup_id,
-                'duration' => $loan_duration,
-                'amount' => $loan_amount,
-                'applied_date' => date('Y-m-d H:i:s'),
-                'attachment' => $filename,
-                'waiver' => $waiver_charge,
-                'encumbrance_amount' => $allowed_loan
+              'staff_id' => $staff_id,
+              'name' => $firstname . ' ' . $othername . ' ' . $lastname,
+              'guarantor' => $guarantor_1,
+              'guarantor_2' => $guarantor_2,
+              'loan_type' => $loan_setup_id,
+              'duration' => $loan_duration,
+              'amount' => $loan_amount,
+              'applied_date' => date('Y-m-d H:i:s'),
+              'attachment' => $filename,
+              'waiver' => $waiver_charge,
+              'encumbrance_amount' => $allowed_loan
             );
 
             $loan_application_id = $this->loanApplicationModel->insert($loan_application_data);
@@ -303,10 +314,10 @@ class LoanApplication extends BaseController
     private function _update_loan_guarantors($loan_application_id, $guarantor_id, $staff_id)
     {
         $guarantor_data = array(
-            'loan_application_id' => $loan_application_id,
-            'guarantor_id' => $guarantor_id,
-            'staff_id' => $staff_id,
-            'confirm' => 0
+          'loan_application_id' => $loan_application_id,
+          'guarantor_id' => $guarantor_id,
+          'staff_id' => $staff_id,
+          'confirm' => 0
         );
         $loan_guarantor_id = $this->loanGuarantorModel->insert($guarantor_data);
         // notify guarantor of the loan application
@@ -314,6 +325,7 @@ class LoanApplication extends BaseController
         $notification_topic = 'You have been selected as a guarantor for a loan';
         $notification_receiver_id = $guarantor_id;
         $notification_details = $loan_guarantor_id;
-        $this->_create_new_notification($notification_type, $notification_topic, $notification_receiver_id, $notification_details);
+        $this->_create_new_notification($notification_type, $notification_topic, $notification_receiver_id,
+          $notification_details);
     }
 }
