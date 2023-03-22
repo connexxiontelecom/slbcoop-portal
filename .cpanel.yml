@@ -10,3 +10,4 @@ deployment:
     - /bin/cp -r ./app/Models/ $APPDEPLOYPATH
     - /bin/cp -r ./app/Views/ $APPDEPLOYPATH
     - /bin/cp ./app/Config/Routes.php $CONFIGDEPLOYPATH
+    - /bin/cp ./app/Config/Email.php $CONFIGDEPLOYPATH

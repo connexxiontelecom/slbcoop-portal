@@ -1,4 +1,5 @@
 <?php
+
 $session = session();
 //  $uri = service('uri');
 ?>
@@ -26,7 +27,7 @@ $session = session();
               <div class="user-balance"><em
                   class="icon ni ni-sign-kobo"></em> <?= number_format($regular_savings, 2) ?></div>
             </div>
-            <a href="#" class="btn btn-white btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
+            <!--            <a href="#" class="btn btn-white btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>-->
           </div>
           <ul class="user-account-data gy-1">
             <li>
@@ -35,7 +36,8 @@ $session = session();
               </div>
               <div class="user-account-value">
                 <span class="lead-text"><em
-                    class="icon ni ni-sign-kobo"></em> <?= number_format($regular_savings - $encumbered_amount, 2, '.', ',') ?></span>
+                    class="icon ni ni-sign-kobo"></em> <?= number_format($regular_savings - $encumbered_amount, 2, '.',
+                      ',') ?></span>
               </div>
             </li>
             <li>
@@ -59,18 +61,22 @@ $session = session();
           <a class="nk-profile-toggle toggle-expand" data-target="sidebarProfile" href="#">
             <div class="user-card-wrap">
               <div class="user-card">
-                <?php if (!$cooperator['cooperator_passport']): ?>
-                  <div class="user-avatar">
+                  <?php
+                  if (!$cooperator['cooperator_passport']): ?>
+                    <div class="user-avatar">
                   <span>
-                      <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0, 1) ?>
+                      <?= mb_substr($session->get('firstname'), 0, 1) . '' . mb_substr($session->get('lastname'), 0,
+                        1) ?>
                     </span>
-                  </div>
-                <?php else: ?>
-                  <div class="nk-block-text mr-2">
-                    <img src="/uploads/passports/<?= $cooperator['cooperator_passport'] ?>" style="width: 3em"
-                         alt="display picture" class="img-fluid circle">
-                  </div>
-                <?php endif ?>
+                    </div>
+                  <?php
+                  else: ?>
+                    <div class="nk-block-text mr-2">
+                      <img src="/uploads/passports/<?= $cooperator['cooperator_passport'] ?>" style="width: 3em"
+                           alt="display picture" class="img-fluid circle">
+                    </div>
+                  <?php
+                  endif ?>
                 <div class="user-info">
                   <span class="lead-text"><?= $session->get('firstname') . ' ' . $session->get('lastname') ?></span>
                   <span class="sub-text"><?= $session->get('email') ?></span>
@@ -87,7 +93,7 @@ $session = session();
                 <h6 class="overline-title-alt">Regular Savings</h6>
                 <div class="user-balance">
                   <em class="icon ni ni-sign-kobo"></em>
-                  <?= number_format($regular_savings, 2) ?>
+                    <?= number_format($regular_savings, 2) ?>
                 </div>
               </div>
               <a href="#" class="btn btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
@@ -99,7 +105,8 @@ $session = session();
                 </div>
                 <div class="user-account-value">
                   <span class="lead-text"><em
-                      class="icon ni ni-sign-kobo"></em> <?= number_format($regular_savings - $encumbered_amount, 2, '.', ',') ?></span>
+                      class="icon ni ni-sign-kobo"></em> <?= number_format($regular_savings - $encumbered_amount, 2,
+                        '.', ',') ?></span>
                 </div>
               </li>
               <li>
@@ -205,21 +212,25 @@ $session = session();
             <h6 class="overline-title">Your Savings Types</h6>
             <!--            <a href="#" class="link">View All</a>-->
           </div>
-          <?php if (!empty($savings_types_amounts_list)): ?>
-            <ul class="wallet-list">
-              <?php foreach ($savings_types_amounts_list as $savings_type => $amount): ?>
-                <li class="wallet-item">
-                  <a href="/account-statement">
-                    <div class="wallet-icon"><em class="icon ni ni-sign-kobo"></em></div>
-                    <div class="wallet-text">
-                      <h6 class="wallet-name"><?= $savings_type ?></h6>
-                      <span class="wallet-balance"><?= number_format($amount, 2) ?> </span>
-                    </div>
-                  </a>
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          <?php endif; ?>
+            <?php
+            if (!empty($savings_types_amounts_list)): ?>
+              <ul class="wallet-list">
+                  <?php
+                  foreach ($savings_types_amounts_list as $savings_type => $amount): ?>
+                    <li class="wallet-item">
+                      <a href="/account-statement">
+                        <div class="wallet-icon"><em class="icon ni ni-sign-kobo"></em></div>
+                        <div class="wallet-text">
+                          <h6 class="wallet-name"><?= $savings_type ?></h6>
+                          <span class="wallet-balance"><?= number_format($amount, 2) ?> </span>
+                        </div>
+                      </a>
+                    </li>
+                  <?php
+                  endforeach; ?>
+              </ul>
+            <?php
+            endif; ?>
         </div><!-- .nk-sidebar-widget -->
         <div class="nk-sidebar-footer">
           <ul class="nk-menu nk-menu-footer">

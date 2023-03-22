@@ -26,29 +26,32 @@ class Auth extends BaseController
             if ($cooperator) {
                 if (password_verify($password, $cooperator['cooperator_password'])) {
                     $user_data = array(
-                        'staff_id' => $cooperator['cooperator_staff_id'],
-                        'firstname' => $cooperator['cooperator_first_name'],
-                        'lastname' => $cooperator['cooperator_last_name'],
-                        'othername' => $cooperator['cooperator_other_name'],
-                        'dob' => $cooperator['cooperator_dob'],
-                        'email' => $cooperator['cooperator_email'],
-                        'address' => $cooperator['cooperator_address'],
-                        'city' => $cooperator['cooperator_city'],
-                        'state' => $this->stateModel->where('state_id', $cooperator['cooperator_state_id'])->first(),
-                        'department' => $this->departmentModel->where('department_id', $cooperator['cooperator_department_id'])->first(),
-                        'location' => $this->locationModel->where('location_id', $cooperator['cooperator_location_id'])->first(),
-                        'payroll_group' => $this->payrollGroupModel->where('pg_id', $cooperator['cooperator_payroll_group_id'])->first(),
-                        'bank' => $this->bankModel->where('bank_id', $cooperator['cooperator_bank_id'])->first(),
-                        'account_number' => $cooperator['cooperator_account_number'],
-                        'bank_branch' => $cooperator['cooperator_bank_branch'],
-                        'sort_code' => $cooperator['cooperator_sort_code'],
-                        'date' => $cooperator['cooperator_date'],
-                        'approved_date' => $cooperator['cooperator_approved_date'],
-                        'savings' => $cooperator['cooperator_savings'],
-                        'status' => $cooperator['cooperator_status'],
-                        'regular_savings' => $this->_get_regular_savings_amount($cooperator['cooperator_staff_id']),
-                        'savings_types_amounts_list' => $this->_get_savings_types_amounts($cooperator['cooperator_staff_id']),
-                        'active' => true
+                      'staff_id' => $cooperator['cooperator_staff_id'],
+                      'firstname' => $cooperator['cooperator_first_name'],
+                      'lastname' => $cooperator['cooperator_last_name'],
+                      'othername' => $cooperator['cooperator_other_name'],
+                      'dob' => $cooperator['cooperator_dob'],
+                      'email' => $cooperator['cooperator_email'],
+                      'address' => $cooperator['cooperator_address'],
+                      'city' => $cooperator['cooperator_city'],
+                      'state' => $this->stateModel->where('state_id', $cooperator['cooperator_state_id'])->first(),
+                      'department' => $this->departmentModel->where('department_id',
+                        $cooperator['cooperator_department_id'])->first(),
+                      'location' => $this->locationModel->where('location_id',
+                        $cooperator['cooperator_location_id'])->first(),
+                      'payroll_group' => $this->payrollGroupModel->where('pg_id',
+                        $cooperator['cooperator_payroll_group_id'])->first(),
+                      'bank' => $this->bankModel->where('bank_id', $cooperator['cooperator_bank_id'])->first(),
+                      'account_number' => $cooperator['cooperator_account_number'],
+                      'bank_branch' => $cooperator['cooperator_bank_branch'],
+                      'sort_code' => $cooperator['cooperator_sort_code'],
+                      'date' => $cooperator['cooperator_date'],
+                      'approved_date' => $cooperator['cooperator_approved_date'],
+                      'savings' => $cooperator['cooperator_savings'],
+                      'status' => $cooperator['cooperator_status'],
+                      'regular_savings' => $this->_get_regular_savings_amount($cooperator['cooperator_staff_id']),
+                      'savings_types_amounts_list' => $this->_get_savings_types_amounts($cooperator['cooperator_staff_id']),
+                      'active' => true
                     );
                     $this->session->set($user_data);
                     $this->session->setFlashdata('login_success', 'You have logged in successfully!');
@@ -92,7 +95,8 @@ class Auth extends BaseController
             return $this->response->setJSON($response_data);
         }
 
-        $application = $this->applicationModel->where('application_staff_id', $post_data['application_staff_id'])->findAll();
+        $application = $this->applicationModel->where('application_staff_id',
+          $post_data['application_staff_id'])->findAll();
         if ($application) {
             $response_data['success'] = false;
             $response_data['msg'] = 'The staff id already exists';
@@ -100,7 +104,8 @@ class Auth extends BaseController
             return $this->response->setJSON($response_data);
         }
 
-        $application = $this->applicationModel->where('application_telephone', $post_data['application_telephone'])->findAll();
+        $application = $this->applicationModel->where('application_telephone',
+          $post_data['application_telephone'])->findAll();
         if ($application) {
             $response_data['success'] = false;
             $response_data['msg'] = 'The telephone number already exists';
@@ -144,7 +149,6 @@ class Auth extends BaseController
 
     function auth_forgot_password()
     {
-
         extract($_POST);
 
         if (!$email) {
@@ -177,19 +181,18 @@ class Auth extends BaseController
 
         $this->passwordResetTokenModel->save($data);
 
-        $this->email->setFrom('info@slbcoop.com', 'SLBCOOP');
         $this->email->setTo($cooperator['cooperator_email']);
         $this->email->setSubject('Reset your password');
-        $this->email->setMailType('html');
         $mail_data = [
-            'user' => $cooperator['cooperator_first_name'] . ' ' . $cooperator['cooperator_last_name'],
-            'link' => site_url('auth/reset-password/' . $plaintext),
+          'user' => $cooperator['cooperator_first_name'] . ' ' . $cooperator['cooperator_last_name'],
+          'link' => site_url('auth/reset-password/' . $plaintext),
         ];
         $body = view('mail/reset-password', $mail_data);
         $this->email->setMessage($body);
         $this->email->send();
 
-        $this->session->setFlashdata('reset_success', 'We have sent you an email with your reset link. Please check your inbox/spam!');
+        $this->session->setFlashdata('reset_success',
+          'We have sent you an email with your reset link. Please check your inbox/spam!');
         return redirect('auth/login');
     }
 

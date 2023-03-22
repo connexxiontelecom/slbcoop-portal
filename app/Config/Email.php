@@ -33,7 +33,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $protocol = 'smtp';
+    public $protocol;
 
     /**
      * The server path to Sendmail.
@@ -47,21 +47,21 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPHost = 'connexxiontelecom.com';
+    public $SMTPHost;
 
     /**
      * SMTP Username
      *
      * @var string
      */
-    public $SMTPUser = 'support@connexxiontelecom.com';
+    public $SMTPUser;
 
     /**
      * SMTP Password
      *
      * @var string
      */
-    public $SMTPPass = 'T,l4q9H0ak~b';
+    public $SMTPPass;
 
     /**
      * SMTP Port
