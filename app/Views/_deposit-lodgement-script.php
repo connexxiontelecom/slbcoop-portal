@@ -22,8 +22,8 @@
           $.ajax({
             type: 'GET',
             url: 'deposit-lodgement/get-active-loans',
-            success: function(responseData) {
-              const { ledgers } = responseData
+            success: function (responseData) {
+              const {ledgers} = responseData
               let scheme = $('#scheme')
               scheme.empty()
               scheme.append(`<option value="default">Default Value</option>`)
@@ -41,8 +41,8 @@
           $.ajax({
             type: 'GET',
             url: 'deposit-lodgement/get-savings-types',
-            success: function(responseData) {
-              const { savings_types } = responseData
+            success: function (responseData) {
+              const {savings_types} = responseData
               let scheme = $('#scheme')
               scheme.empty()
               scheme.append(`<option value="default">Default Value</option>`)
@@ -113,7 +113,7 @@
           schemeAmount
         }
       ]
-      schemeTable.forEach((entry, index)=> {
+      schemeTable.forEach((entry, index) => {
         let sn = index
         const rowContent = `
           <tr>
@@ -168,7 +168,7 @@
         Swal.fire('Invalid Submission', 'Please select a valid payment type!', 'error')
       } else if (!coopBank || coopBank === 'default') {
         Swal.fire('Invalid Submission', 'Please select a valid coop bank!', 'error')
-      } else if (!paymentDate || !paymentAmount || !paymentProof) {
+      } else if (!paymentDate || !paymentAmount) {
         Swal.fire('Invalid Submission', 'Please fill in all required fields!!', 'error')
       } else {
         const formData = new FormData(this)
@@ -205,10 +205,10 @@
   })
 
   function delPurpose(index) {
-    schemeTotal -=  parseFloat(schemeTable[index].schemeAmount.replace(/,/g, ''))
+    schemeTotal -= parseFloat(schemeTable[index].schemeAmount.replace(/,/g, ''))
     schemeTable.splice(index, 1)
     $('#scheme-table tbody').empty()
-    schemeTable.forEach((entry, index)=> {
+    schemeTable.forEach((entry, index) => {
       let sn = index
       const rowContent = `
           <tr>

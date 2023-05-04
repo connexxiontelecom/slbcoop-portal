@@ -3,14 +3,13 @@
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
-use App\Controllers\Auth;
 
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
 if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
-    require SYSTEMPATH . 'Config/Routes.php';
+  require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /**
@@ -57,6 +56,9 @@ $routes->post('withdrawal-application/submit-application', 'WithdrawalApplicatio
 
 $routes->get('savings-variation', 'SavingsVariation::index');
 
+$routes->get('closure-form', 'ClosureForm::index');
+$routes->post('closure-form/submit-closure-form', 'ClosureForm::submit_closure_form');
+
 $routes->get('deposit-lodgement', 'DepositLodgement::index');
 $routes->get('deposit-lodgement/get-active-loans', 'DepositLodgement::get_active_loans');
 $routes->get('deposit-lodgement/get-savings-types', 'DepositLodgement::get_savings_types');
@@ -99,5 +101,5 @@ $routes->get('logout', 'Auth::logout');
  * needing to reload it.
  */
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

@@ -3,13 +3,13 @@ $session = session();
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
-<?php include(APPPATH.'/Views/_head.php'); ?>
+<?php include(APPPATH . '/Views/_head.php'); ?>
 <body class="nk-body npc-crypto bg-white has-sidebar">
 <div class="nk-app-root">
   <div class="nk-main">
-    <?php include(APPPATH.'/Views/_sidebar.php'); ?>
+    <?php include(APPPATH . '/Views/_sidebar.php'); ?>
     <div class="nk-wrap">
-      <?php include(APPPATH.'/Views/_header.php'); ?>
+      <?php include(APPPATH . '/Views/_header.php'); ?>
       <div class="nk-content nk-content-fluid">
         <div class="container-xl wide-lg">
           <div class="nk-content-body">
@@ -39,9 +39,11 @@ $session = session();
                           <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <label for="payment-type" class="form-label font-weight-bold">Payment Type <span class="text-danger"> *</span></label>
+                                <label for="payment-type" class="form-label font-weight-bold">Payment Type <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <select name="payment_type" id="payment-type" class="form-select form-control" required>
+                                  <select name="payment_type" id="payment-type" class="form-select form-control"
+                                          required>
                                     <option value="default">Default Value</option>
                                     <option value="1">Cash</option>
                                     <option value="2">Cheque</option>
@@ -53,41 +55,48 @@ $session = session();
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label for="coop-bank" class="form-label font-weight-bold">Coop Bank <span class="text-danger"> *</span></label>
+                                <label for="coop-bank" class="form-label font-weight-bold">Coop Bank <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <select name="coop_bank" id="coop-bank" class="form-select form-control" required>
                                     <option value="default">Default Value</option>
-                                    <?php if (!empty($coop_banks)): foreach ($coop_banks as $coop_bank):?>
-                                      <option value="<?=$coop_bank['coop_bank_id']?>">
-                                        <?=$coop_bank['account_no']?>, <?=$coop_bank['bank']['bank_name']?> - <?=$coop_bank['description']?>
+                                    <?php if (!empty($coop_banks)): foreach ($coop_banks as $coop_bank): ?>
+                                      <option value="<?= $coop_bank['coop_bank_id'] ?>">
+                                        <?= $coop_bank['account_no'] ?>, <?= $coop_bank['bank']['bank_name'] ?>
+                                        - <?= $coop_bank['description'] ?>
                                       </option>
-                                    <?php endforeach; endif;?>
+                                    <?php endforeach; endif; ?>
                                   </select>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label for="payment-date" class="form-label font-weight-bold">Payment Date <span class="text-danger"> *</span></label>
+                                <label for="payment-date" class="form-label font-weight-bold">Payment Date <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control date-picker" id="payment-date" name="payment_date" placeholder="Select date of payment" required>
+                                  <input type="text" class="form-control date-picker" id="payment-date"
+                                         name="payment_date" placeholder="Select date of payment" required>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label for="payment-amount" class="form-label font-weight-bold">Payment Amount <span class="text-danger"> *</span></label>
+                                <label for="payment-amount" class="form-label font-weight-bold">Payment Amount <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control number" id="payment-amount" name="payment_amount" required>
+                                  <input type="text" class="form-control number" id="payment-amount"
+                                         name="payment_amount" required>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label for="payment-proof" class="form-label font-weight-bold">Proof of Payment <span class="text-danger"> *</span></label>
+                                <label for="payment-proof" class="form-label font-weight-bold">Proof of Payment</label>
                                 <div class="form-control-wrap">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="payment-proof" name="payment_proof" required>
+                                    <input type="file" class="custom-file-input" id="payment-proof" name="payment_proof"
+                                           required>
                                     <label class="custom-file-label" for="payment-proof">Choose file</label>
                                   </div>
                                 </div>
@@ -124,7 +133,8 @@ $session = session();
                               <div class="form-group">
                                 <label for="scheme-amount" class="form-label font-weight-bold">Amount</label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control number" id="scheme-amount" name="scheme_amount">
+                                  <input type="text" class="form-control number" id="scheme-amount"
+                                         name="scheme_amount">
                                 </div>
                               </div>
                             </div>
@@ -153,15 +163,16 @@ $session = session();
                                 </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th colspan="4">Enter scheme details</th>
-                                  </tr>
+                                <tr>
+                                  <th colspan="4">Enter scheme details</th>
+                                </tr>
                                 </tbody>
                               </table>
                             </div>
                             <div class="col-12">
                               <div class="alert alert-icon alert-warning mt-2 mb-1" role="alert" id="amounts-unequal">
-                                <em class="icon ni ni-alert-circle"></em> Please note, the purpose breakdown amount sum must equal <strong>Payment Amount</strong> to submit this deposit.
+                                <em class="icon ni ni-alert-circle"></em> Please note, the purpose breakdown amount sum
+                                must equal <strong>Payment Amount</strong> to submit this deposit.
                               </div>
                             </div>
                             <div class="col-12">
@@ -180,11 +191,11 @@ $session = session();
           </div>
         </div>
       </div>
-      <?php include(APPPATH.'/Views/_footer.php'); ?>
+      <?php include(APPPATH . '/Views/_footer.php'); ?>
     </div>
   </div>
 </div>
-<?php include(APPPATH.'/Views/_scripts.php'); ?>
-<?php include(APPPATH.'/Views/_deposit-lodgement-script.php')?>
+<?php include(APPPATH . '/Views/_scripts.php'); ?>
+<?php include(APPPATH . '/Views/_deposit-lodgement-script.php') ?>
 </body>
 </html>
