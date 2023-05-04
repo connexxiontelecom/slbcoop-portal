@@ -3,13 +3,13 @@ $session = session();
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
-<?php include(APPPATH.'/Views/_head.php'); ?>
+<?php include(APPPATH . '/Views/_head.php'); ?>
 <body class="nk-body npc-crypto bg-white has-sidebar">
 <div class="nk-app-root">
   <div class="nk-main">
-    <?php include(APPPATH.'/Views/_sidebar.php'); ?>
+    <?php include(APPPATH . '/Views/_sidebar.php'); ?>
     <div class="nk-wrap">
-      <?php include(APPPATH.'/Views/_header.php'); ?>
+      <?php include(APPPATH . '/Views/_header.php'); ?>
       <div class="nk-content nk-content-fluid">
         <div class="container-xl wide-lg">
           <div class="nk-content-body">
@@ -32,31 +32,35 @@ $session = session();
                   <div class="col-lg-7">
                     <div class="card card-preview">
                       <div class="card-inner">
-                        <form class="form-validate" id="withdrawal-application">
+                        <form class="form-validate" id="savings-variation">
                           <div class="preview-block">
                             <span class="preview-title-lg overline-title">Savings Variation Details</span>
                           </div>
                           <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <label for="savings-type" class="form-label font-weight-bold">Savings Type <span class="text-danger"> *</span></label>
+                                <label for="savings-type" class="form-label font-weight-bold">Savings Type <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <select name="savings_type" id="savings-type" class="form-select form-control" required>
+                                  <select name="ct_type_id" id="savings-type" class="form-select form-control"
+                                          required>
                                     <option value="default">Default Value</option>
-                                    <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type):?>
-                                      <option value="<?=$savings_type['contribution_type_id']?>">
-                                        <?=$savings_type['contribution_type_name']?>
+                                    <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type): ?>
+                                      <option value="<?= $savings_type['contribution_type_id'] ?>">
+                                        <?= $savings_type['contribution_type_name'] ?>
                                       </option>
-                                    <?php endforeach; endif;?>
+                                    <?php endforeach; endif; ?>
                                   </select>
                                 </div>
                               </div>
                             </div>
                             <div class="col-6">
                               <div class="form-group">
-                                <label for="variation-start-month" class="form-label font-weight-bold">Variation Start Month <span class="text-danger"> *</span></label>
+                                <label for="variation-start-month" class="form-label font-weight-bold">Variation Start
+                                  Month <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <select name="variation_start_month" id="variation-start-month" class="form-select form-control" required>
+                                  <select name="sv_month" id="variation-start-month"
+                                          class="form-select form-control" required>
                                     <option value="default">Default Value</option>
                                     <option value="1">January</option>
                                     <option value="2">February</option>
@@ -76,12 +80,14 @@ $session = session();
                             </div>
                             <div class="col-6">
                               <div class="form-group">
-                                <label for="variation-start-year" class="form-label font-weight-bold">Variation Start Year <span class="text-danger"> *</span></label>
+                                <label for="variation-start-year" class="form-label font-weight-bold">Variation Start
+                                  Year <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <select name="variation_start_year" id="variation-start-year" class="form-select form-control" required>
+                                  <select name="sv_year" id="variation-start-year"
+                                          class="form-select form-control" required>
                                     <option value="default">Default Value</option>
-                                    <?php for($i = date('Y'); $i <= date('Y')+5; $i++):?>
-                                      <option value="<?=$i?>"><?=$i?></option>
+                                    <?php for ($i = date('Y'); $i <= date('Y') + 5; $i++): ?>
+                                      <option value="<?= $i ?>"><?= $i ?></option>
                                     <?php endfor; ?>
                                   </select>
                                 </div>
@@ -89,9 +95,11 @@ $session = session();
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label for="variation-amount" class="form-label font-weight-bold">Variation Amount <span class="text-danger"> *</span></label>
+                                <label for="variation-amount" class="form-label font-weight-bold">Variation Amount <span
+                                    class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control number" id="variation-amount" name="variation_amount" required>
+                                  <input type="text" class="form-control number" id="variation-amount" name="sv_amount"
+                                         required>
                                 </div>
                               </div>
                             </div>
@@ -123,11 +131,11 @@ $session = session();
           </div>
         </div>
       </div>
-      <?php include(APPPATH.'/Views/_footer.php'); ?>
+      <?php include(APPPATH . '/Views/_footer.php'); ?>
     </div>
   </div>
 </div>
-<?php include(APPPATH.'/Views/_scripts.php'); ?>
-<?php //include(APPPATH.'/Views/_withdrawal-application-script.php'); ?>
+<?php include(APPPATH . '/Views/_scripts.php'); ?>
+<?php include(APPPATH . '/Views/_savings-variation-script.php'); ?>
 </body>
 </html>

@@ -2,8 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\SavingsVariationModel;
+
 class SavingsVariation extends BaseController
 {
+
+  private $SavingsVariationModel;
+
+  public function __construct()
+  {
+    $this->SavingsVariationModel = new SavingsVariationModel();
+  }
 
   function index()
   {
@@ -18,5 +27,29 @@ class SavingsVariation extends BaseController
       return view('service-forms/savings-variation', $page_data);
     }
     return redirect('auth/login');
+  }
+
+  function submit_savings_variation()
+  {
+    if (!$this->session->active) {
+      return redirect('auth/login');
+    }
+    $staff_id = $this->session->get('staff_id');
+    $response_data = array();
+    $post_data = $this->request->getPost();
+    if ($post_data) {
+      $post_data['sv_staff_id'] = $staff_id;
+      $post_data['sv_status'] = 0;
+      $post_data['sv_applied_by'] = $this->session->firstname . ' ' . $this->session->lastname;
+      $saved = $this->SavingsVariationModel->save($post_data);
+      if (!$saved) {
+        $response_data['success'] = false;
+        $response_data['msg'] = 'Oops, Something went wrong! Please try again later.';
+        return $this->response->setJSON($response_data);
+      }
+      $response_data['success'] = true;
+      $response_data['msg'] = 'Savings variation submitted successfully';
+      return $this->response->setJSON($response_data);
+    }
   }
 }

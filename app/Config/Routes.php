@@ -55,6 +55,7 @@ $routes->get('withdrawal-application/compute-balance/(:any)', 'WithdrawalApplica
 $routes->post('withdrawal-application/submit-application', 'WithdrawalApplication::submit_withdrawal_application');
 
 $routes->get('savings-variation', 'SavingsVariation::index');
+$routes->post('savings-variation/submit-variation', 'SavingsVariation::submit_savings_variation');
 
 $routes->get('closure-form', 'ClosureForm::index');
 $routes->post('closure-form/submit-closure-form', 'ClosureForm::submit_closure_form');
