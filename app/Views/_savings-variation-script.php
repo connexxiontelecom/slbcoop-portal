@@ -13,10 +13,10 @@
         formData.set('sv_amount', formData.get('sv_amount').replace(/,/g, ''))
         Swal.fire({
           title: 'Are you sure?',
-          text: 'Request for Account Closure',
+          text: 'Create New Variation',
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: 'Confirm Closure'
+          confirmButtonText: 'Confirm Variation'
         }).then(function (confirm) {
           if (confirm.value) {
             $.ajax({
