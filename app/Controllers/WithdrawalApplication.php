@@ -44,7 +44,7 @@ class WithdrawalApplication extends BaseController
         }
       }
       $savings_amount = $this->_get_savings_type_amount($staff_id, $savings_type);
-//            $actual_savings_amount = $savings_amount - $encumbered_amount;
+//      $actual_savings_amount = $savings_amount - $encumbered_amount;
       $actual_savings_amount = $savings_amount;
       $withdrawable_amount = 0;
       $policy_config = $this->policyConfigModel->first();
@@ -56,16 +56,18 @@ class WithdrawalApplication extends BaseController
       foreach ($outstanding_loans as $loan) {
         $cumulative_loan_balance += $loan['loan_balance'];
       }
-      if ($savings_amount) {
-        $cumulative_amount = $cumulative_loan_balance * ($max_withdrawal / 100);
-        $resultant_amount = $cumulative_amount + $minimum_savings;
-        $withdrawal_amount = $actual_savings_amount - $resultant_amount;
-        $withdrawable_amount = $withdrawal_amount * (1 - ($withdrawal_charge / 100));
-      }
+//      if ($savings_amount) {
+//        $cumulative_amount = $cumulative_loan_balance * ($max_withdrawal / 100);
+//        $resultant_amount = $cumulative_amount + $minimum_savings;
+//        $withdrawal_amount = $actual_savings_amount - $resultant_amount;
+//        $withdrawable_amount = $withdrawal_amount * (1 - ($withdrawal_charge / 100));
+//      }
+      $withdrawal_amount = $actual_savings_amount - $encumbered_amount;
       $response_data = [
         'success' => true,
         'savings_amount' => $savings_amount,
-        'withdrawable_amount' => $withdrawable_amount,
+//        'withdrawable_amount' => $withdrawable_amount,
+        'withdrawable_amount' => $withdrawal_amount,
         'encumbered_amount' => $encumbered_amount,
         'withdrawal_charge' => $withdrawal_charge
       ];
