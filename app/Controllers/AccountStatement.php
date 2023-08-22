@@ -68,7 +68,7 @@ class AccountStatement extends BaseController
     return redirect('auth/login');
   }
 
-  private function _get_brought_forward($savings_type, $start_date): int
+  private function _get_brought_forward($savings_type, $start_date)
   {
     $staff_id = $this->session->get('staff_id');
     $payment_details = $this->paymentDetailModel->get_payment_details_before_date($staff_id, $savings_type, $start_date);

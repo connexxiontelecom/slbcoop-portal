@@ -258,6 +258,7 @@ $loan_detail = $loan_details[0];
                     </tbody>
                   </table>
                 </div><!-- .card-preview -->
+                <!--                pdf -->
                 <div class="d-none w-100">
                   <div id="print" class="w-100 pl-2 pr-4 pt-3">
                     <img class="logo-dark logo-img mb-3" src="/assets/images/logo.png" alt="logo-dark">
@@ -274,7 +275,7 @@ $loan_detail = $loan_details[0];
                         .
                       </p>
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 text">
                       <div class="card-title-group align-start mb-0">
                         <div class="card-title w-100 d-flex justify-content-between">
                           <h6 class="title">Loan Details</h6>
@@ -478,6 +479,7 @@ $loan_detail = $loan_details[0];
                     </table>
                   </div>
                 </div>
+                <!--                pdf end-->
 
               </div> <!-- nk-block -->
             </div><!-- .components-preview -->

@@ -22,20 +22,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 
-  function exportPdf(filename) {
-    const source = document.getElementById('print')
-    const options = {
-      margin: 0,
-      filename,
-      pagebreak: {mode: 'avoid-all'},
-      html2canvas: {
-        scale: 2,
-        height: 1000
-      },
-      jsPDF: {unit: 'in', format: 'a4', orientation: 'portrait'}
+    function exportPdf(filename) {
+        const source = document.getElementById('print')
+        const options = {
+            margin: 0,
+            filename,
+            pagebreak: {mode: ['avoid-all', 'css', 'legacy']},
+            html2canvas: {
+                // scale: 2,
+                // height: 1000
+            },
+            jsPDF: {unit: 'in', format: 'a4', orientation: 'portrait'}
+        }
+        html2pdf().set(options).from(source).save()
     }
-    html2pdf().set(options).from(source).save()
-  }
 
 
 </script>
